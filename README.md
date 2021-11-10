@@ -17,4 +17,7 @@
 
 - Appen ska vara användarvänlig och kompatibel med relevanta appmarknadskrav
 - Appen ska alltså vara färdig att publiseras på Play store eller Apple store
-  ## Obs. Appen behöver endast uppfylla kraven för bli godkänd men behöver ej ha blivit publiserad vid kursens slut
+
+### TEST COMMIT
+
+## Obs. Appen behöver endast uppfylla kraven för bli godkänd men behöver ej ha blivit publiserad vid kursens slut
