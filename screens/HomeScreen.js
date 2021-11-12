@@ -9,7 +9,7 @@ const HomeScreen = () => {
 	const [state, setState] = useState(null)
 	const [location, setLocation] = useState(null)
 	const [errorMsg, setErrorMsg] = useState(null)
-	let points = [{ latitude: 57.7227782, longitude: 11.7634911, weight: 1 }]
+	let points = [{ latitude: 57.7227782, longitude: 11.7634911, weight: 100 }]
 
 	useEffect(() => {
 		;(async () => {
@@ -37,7 +37,17 @@ const HomeScreen = () => {
 					longitudeDelta: 0.0421,
 				}}
 			>
-				<Heatmap points={points} opacity={1} radius={20} maxIntensity={100} />
+				<Heatmap
+					points={points}
+					opacity={0.7}
+					radius={50}
+					maxIntensity={100}
+					gradientSmoothing={100}
+					heatmapMode={'POINTS_WEIGHT'}
+					colors={{
+						colors: ['red', 'lightgreen', 'yellow', 'orange', 'green'],
+					}}
+				/>
 			</MapView>
 		</View>
 	)
