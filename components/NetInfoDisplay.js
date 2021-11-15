@@ -5,20 +5,15 @@ import * as Location from 'expo-location'
 import MapView from 'react-native-maps'
 import { Heatmap } from 'react-native-maps'
 
-const HomeScreen = () => {
-	const [state, setState] = useState()
-	const [location, setLocation] = useState(null)
-	const [errorMsg, setErrorMsg] = useState(null)
-	let points = [{ latitude: 57.7227782, longitude: 11.7634911, weight: 100 }]
+const NetInfoDisplay = () => {
+	const [state, setState] = useState(null)
 
 	useEffect(() => {
-		const unsubscribe = NetInfo.addEventListener((state) => {
-			console.log('Connection type', state.type)
-			console.log('Is connected?', state.isConnected)
+		NetInfo.addEventListener((state) => {
 			console.log('HELA STATE: ', state)
 			setState(state)
 		})
-	}, [state?.strength])
+	}, [state])
 
 	return (
 		<View style={styles.container}>
@@ -28,21 +23,22 @@ const HomeScreen = () => {
 					<Text>Frequency: {state.details.frequency}</Text>
 					<Text>Ip address: {state.details.ipAddress}</Text>
 					<Text>
-						ConnectionExpensive: {String(state.details.isConnectionExpensive)}
+						Connection expensive: {String(state.details.isConnectionExpensive)}
 					</Text>
 					<Text>SSID: {state.details.ssid}</Text>
 					<Text>Strength: {state.details.strength}</Text>
 					<Text>Subnet: {state.details.subnet}</Text>
 
 					<Text>Connected: {String(state.isConnected)}</Text>
-					<Text>InternetReachable: {String(state.isInternetReachable)}</Text>
+					<Text>Internet reachable: {String(state.isInternetReachable)}</Text>
+					<Text>Type: {state.type}</Text>
 				</View>
 			)}
 		</View>
 	)
 }
 
-export default HomeScreen
+export default NetInfoDisplay
 
 const styles = StyleSheet.create({
 	container: {
@@ -50,9 +46,5 @@ const styles = StyleSheet.create({
 		backgroundColor: '#fff',
 		alignItems: 'flex-start',
 		justifyContent: 'center',
-	},
-	map: {
-		width: Dimensions.get('window').width - 30,
-		height: Dimensions.get('window').height - 250,
 	},
 })
