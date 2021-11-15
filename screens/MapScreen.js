@@ -1,0 +1,67 @@
+import React, { useState } from 'react'
+import { StyleSheet, Text, View, Dimensions, TouchableOpacity } from 'react-native'
+import MapView from 'react-native-maps'
+
+const MapScreen = () => {
+  const [mapType, setMapType] = useState('standard')
+
+  const changeMapType = () => {
+    if (mapType === 'standard') {
+      setMapType('satellite')
+    } else if (mapType === 'satellite') {
+      setMapType('standard')
+    }
+  }
+
+  return (
+    <View style={styles.container}>
+      <MapView
+        style={styles.map}
+        showsUserLocation={true}
+        showsMyLocationButton={true}
+        // followsUserLocation={true}
+        mapType={mapType}
+      />
+      <View style={styles.chipView}>
+        <TouchableOpacity style={styles.chipsItem} onPress={() => changeMapType()}>
+          <Text>{mapType === 'standard' ? 'Satellit' : 'Karta'}</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  )
+}
+
+export default MapScreen
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  map: {
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height
+  },
+  chipsItem: {
+    flexDirection: "row",
+    backgroundColor: '#fff',
+    borderRadius: 20,
+    padding: 8,
+    paddingHorizontal: 20,
+    marginHorizontal: 10,
+    height: 35,
+    shadowColor: '#ccc',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.5,
+    shadowRadius: 5,
+    elevation: 10,
+  },
+  chipView: {
+    flexDirection: 'row',
+    position: 'absolute',
+    top: Platform.OS === 'ios' ? 60 : 50,
+    paddingHorizontal: 10
+  }
+})
