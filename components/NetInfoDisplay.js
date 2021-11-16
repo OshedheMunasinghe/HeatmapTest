@@ -1,39 +1,99 @@
 import React, { useEffect, useState } from 'react'
-import { StyleSheet, Text, View, Dimensions } from 'react-native'
+import { Button, StyleSheet, Text, View } from 'react-native'
 import NetInfo from '@react-native-community/netinfo'
-import * as Location from 'expo-location'
-import MapView from 'react-native-maps'
-import { Heatmap } from 'react-native-maps'
 
 const NetInfoDisplay = () => {
-	const [state, setState] = useState(null)
+	NetInfo.configure({
+		reachabilityUrl: 'https://clients3.google.com/generate_204',
+		reachabilityTest: async (response) => response.status === 204,
+		reachabilityLongTimeout: 60 * 1000, // 60s
+		reachabilityShortTimeout: 1 * 1000, // 5s
+		reachabilityRequestTimeout: 15 * 1000, // 15s
+		reachabilityShouldRun: () => true,
+	})
+
+	const [state, setState] = useState({
+		connectionStatus: false,
+		connectionType: null,
+		connectionReachable: false,
+		connectionWifiEnabled: false,
+		connectionDetails: null,
+	})
+
+	const [intervalTime, setIntervalTime] = useState(4000)
+
+	function unsubscribe() {
+		NetInfo.fetch()
+			.then((response) => {
+				setState({
+					connectionStatus: response.isConnected,
+					connectionType: response.type,
+					connectionReachable: response.isInternetReachable,
+					connectionWifiEnabled: response.isWifiEnabled,
+					connectionDetails: response.details,
+				})
+			})
+			.catch((error) => {
+				console.log(error)
+			})
+	}
 
 	useEffect(() => {
-		NetInfo.addEventListener((state) => {
-			console.log('HELA STATE: ', state)
-			setState(state)
-		})
-	}, [state])
+		unsubscribe()
+		const interval = setInterval(() => {
+			unsubscribe()
+			console.log('Fetch NetInfo every' + { intervalTime } + 'seconds')
+		}, intervalTime)
+		return () => clearInterval(interval)
+	}, [])
 
 	return (
 		<View style={styles.container}>
-			{state && (
-				<View>
-					<Text>BSSID: {state.details.bssid}</Text>
-					<Text>Frequency: {state.details.frequency}</Text>
-					<Text>Ip address: {state.details.ipAddress}</Text>
-					<Text>
-						Connection expensive: {String(state.details.isConnectionExpensive)}
-					</Text>
-					<Text>SSID: {state.details.ssid}</Text>
-					<Text>Strength: {state.details.strength}</Text>
-					<Text>Subnet: {state.details.subnet}</Text>
-
-					<Text>Connected: {String(state.isConnected)}</Text>
-					<Text>Internet reachable: {String(state.isInternetReachable)}</Text>
-					<Text>Type: {state.type}</Text>
-				</View>
-			)}
+			<Text>
+				Connection Status :{' '}
+				{state.connectionStatus ? 'Connected' : 'Disconnected'}
+			</Text>
+			<Text>Connection Type : {state.connectionType}</Text>
+			<Text>
+				Internet Reachable : {state.connectionReachable ? 'YES' : 'NO'}
+			</Text>
+			<Text>Wifi Enabled : {state.connectionWifiEnabled ? 'YES' : 'NO'}</Text>
+			<Text>
+				{'\n'}Connection Details : {'\n'}
+				{state.connectionType == 'wifi'
+					? (state.connectionDetails.isConnectionExpensive
+							? 'Connection Expensive: YES'
+							: 'Connection Expensive: NO') +
+					  '\n' +
+					  'SSID: ' +
+					  state.connectionDetails.ssid +
+					  '\n' +
+					  'BSSID: ' +
+					  state.connectionDetails.bssid +
+					  '\n' +
+					  'Strength: ' +
+					  state.connectionDetails.strength +
+					  '\n' +
+					  'Ip Address: ' +
+					  state.connectionDetails.ipAddress +
+					  '\n' +
+					  'Subnet: ' +
+					  state.connectionDetails.subnet +
+					  '\n' +
+					  'Frequency: ' +
+					  state.connectionDetails.frequency
+					: state.connectionType == 'cellular'
+					? (state.connectionDetails.isConnectionExpensive
+							? 'Connection Expensive: YES'
+							: 'Connection Expensive: NO') +
+					  '\n' +
+					  'cellularGeneration: ' +
+					  state.connectionDetails.cellularGeneration +
+					  '\n' +
+					  'carrier: ' +
+					  state.connectionDetails.carrier
+					: 'Check your connection'}
+			</Text>
 		</View>
 	)
 }
@@ -46,5 +106,8 @@ const styles = StyleSheet.create({
 		backgroundColor: '#fff',
 		alignItems: 'flex-start',
 		justifyContent: 'center',
+		flexDirection: 'column',
+		padding: 10,
+		margin: 20,
 	},
 })
