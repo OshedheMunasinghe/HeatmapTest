@@ -18,7 +18,7 @@ const MapScreen = () => {
 	// const [ip, setIp] = useState(null)
 	const [isLoading, setIsLoading] = useState(true)
 	// const [heatmap, setHeatmap] = useState(true)
-	const [points, setPoints] = useState([])
+	const [points, setPoints] = useState([{ latitude: 1, longitude: 1, weight: 1 }])
 	const [rec, setRec] = useState(false)
 	const [asd, setAsd] = useState()
 
