@@ -29,7 +29,24 @@ const MapScreen = () => {
 				showsMyLocationButton={true}
 				// followsUserLocation={true}
 				mapType={mapType}
-			/>
+			>
+				<Heatmap
+					initialRegion={{
+						latitude: location.latitude,
+						longitude: location.longitude,
+						latitudeDelta: 0.0922,
+						longitudeDelta: 0.0421
+					}}
+					points={points}
+					radius={40}
+					gradient={{
+						// colors: ['black', 'purple', 'red', 'yellow', 'white'],
+						colors: myArray2,
+						startPoints: [0.01, 0.04, 0.1, 0.45, 0.5],
+						colorMapSize: 200
+					}}
+				></Heatmap>
+			</MapView>
 			<View style={styles.chipView}>
 				<TouchableOpacity
 					style={styles.chipsItem}
