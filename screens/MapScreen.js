@@ -15,9 +15,7 @@ const MapScreen = () => {
 	const [mapType, setMapType] = useState('standard')
 	const [location, setLocation] = useState({ latitude: null, longitude: null })
 	const [errorMsg, setErrorMsg] = useState(null)
-	// const [ip, setIp] = useState(null)
 	const [isLoading, setIsLoading] = useState(true)
-	// const [heatmap, setHeatmap] = useState(true)
 	const [points, setPoints] = useState([{ latitude: 1, longitude: 1, weight: 1 }])
 	const [rec, setRec] = useState(false)
 	const [asd, setAsd] = useState()
@@ -27,11 +25,9 @@ const MapScreen = () => {
 			setIsLoading(true)
 			let { status } = await Location.requestForegroundPermissionsAsync()
 			if (status !== 'granted') {
-				// setErrorMsg('Permission to access location was denied')
 				return
 			}
 			let location = await Location.getCurrentPositionAsync({})
-			// setLocation(location)
 			setLocation({ latitude: location.coords.latitude, longitude: location.coords.longitude })
 			console.log(location)
 			setIsLoading(false)
@@ -55,14 +51,9 @@ const MapScreen = () => {
 			distanceInterval: 1,
 			timeInterval: 1000,
 		}, (loc) => {
-			// myArray.push([{ latitude: loc.coords.latitude, longitude: loc.coords.longitude, weight: 1 }])
 			let newValue = { latitude: loc.coords.latitude, longitude: loc.coords.longitude, weight: 1 }
-			// myArray.push(newValue)
-
 			setPoints(oldArray => [...oldArray, newValue])
 			console.log(loc.coords.latitude, loc.coords.longitude)
-			// blabla.push({ latitude: loc.coords.latitude, longitude: loc.coords.longitude, weight: 1 })
-
 		})
 		return setAsd(client)
 	}
@@ -70,8 +61,6 @@ const MapScreen = () => {
 		setRec(false)
 		console.log('Stoppad inspelning')
 		console.log(points)
-		// setPoints(blabla)
-		// await asd.remove()
 		await asd.remove()
 	}
 
@@ -84,8 +73,6 @@ const MapScreen = () => {
 					showsUserLocation={true}
 					showsMyLocationButton={true}
 					provider='google'
-					// followsUserLocation={true}
-					// showsCompass={true}
 					initialRegion={{
 						latitude: location.latitude,
 						longitude: location.longitude,
