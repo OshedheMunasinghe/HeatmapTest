@@ -21,6 +21,11 @@ const NetInfoDisplay = () => {
 	})
 
 	const [intervalTime, setIntervalTime] = useState(4000)
+	const [randomNumber, setRandomNumber] = useState(randomSignalStrength())
+
+	function randomSignalStrength() {
+		return Math.floor(Math.random() * (99 - 65) + 65)
+	}
 
 	function unsubscribe() {
 		NetInfo.fetch()
@@ -42,7 +47,8 @@ const NetInfoDisplay = () => {
 		unsubscribe()
 		const interval = setInterval(() => {
 			unsubscribe()
-			console.log('Fetch NetInfo every' + { intervalTime } + 'seconds')
+			setRandomNumber(randomSignalStrength())
+			console.log('Fetch NetInfo every' + intervalTime + 'miliseconds')
 		}, intervalTime)
 		return () => clearInterval(interval)
 	}, [])
@@ -89,6 +95,9 @@ const NetInfoDisplay = () => {
 					  '\n' +
 					  'cellularGeneration: ' +
 					  state.connectionDetails.cellularGeneration +
+					  '\n' +
+					  'Signal Strength: ' +
+					  randomNumber +
 					  '\n' +
 					  'carrier: ' +
 					  state.connectionDetails.carrier
