@@ -10,6 +10,7 @@ import {
 import * as Location from 'expo-location'
 import MapView, { Heatmap } from 'react-native-maps'
 import NetInfoDisplay from '../components/NetInfoDisplay'
+import {Button} from "react-native-elements";
 
 const MapScreen = () => {
 	const [mapType, setMapType] = useState('standard')
@@ -66,7 +67,7 @@ const MapScreen = () => {
 
 	return (
 		<View style={styles.container}>
-			<NetInfoDisplay />
+			{/*<NetInfoDisplay />*/}
 			{isLoading ? (<ActivityIndicator style={styles.map} size='large' />) : (
 				<MapView
 					style={styles.map}
@@ -80,6 +81,7 @@ const MapScreen = () => {
 						longitudeDelta: 0.0421
 					}}
 					mapType={mapType}
+					map
 				>
 					<Heatmap
 						initialRegion={{
@@ -98,6 +100,10 @@ const MapScreen = () => {
 					/>
 				</MapView>)}
 
+			<View style={styles.buttonContainer}>
+				<Button title={'■'} buttonStyle={{backgroundColor: "#000000", borderRadius: 16, width: 62, height: 62, opacity: .5}} titleStyle={{color: "red", fontSize: 20,}}/>
+			</View>
+
 			<View style={styles.chipView}>
 				<TouchableOpacity
 					style={styles.chipsItem}
@@ -105,16 +111,17 @@ const MapScreen = () => {
 				>
 					<Text>{mapType === 'standard' ? 'Satellit' : 'Karta'}</Text>
 				</TouchableOpacity>
-				{!rec ? (<TouchableOpacity style={styles.chipsItem} onPress={() => recording()}>
+				{/*{!rec ? (<TouchableOpacity style={styles.chipsItem} onPress={() => recording()}>
 					<Text>Starta inspelningen</Text>
 				</TouchableOpacity>) : (<TouchableOpacity style={styles.chipsItem} onPress={() => stop()}>
 					<Text>Stoppa</Text>
-				</TouchableOpacity>)}
+				</TouchableOpacity>)}*/}
 				<TouchableOpacity style={styles.chipsItem} onPress={() => setPoints([])}>
 					<Text>Radera</Text>
 				</TouchableOpacity>
 			</View>
 		</View>
+
 	)
 }
 
@@ -152,4 +159,10 @@ const styles = StyleSheet.create({
 		top: Platform.OS === 'ios' ? 60 : 50,
 		paddingHorizontal: 10,
 	},
+	buttonContainer:{
+		flexDirection: 'row',
+		position: 'absolute',
+		bottom: 38,
+		paddingHorizontal: 10,
+	}
 })
