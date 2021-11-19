@@ -1,6 +1,7 @@
 import React from 'react'
 import {StyleSheet, Text, View} from 'react-native'
-import MapScreen from './screens/MapScreen'
+import MapScreen from "./src/screens/Map/MapScreen";
+
 
 export default function App() {
     return (
