@@ -1,13 +1,13 @@
-import React, {useEffect, useState} from "react";
-import {Card, Text} from "react-native-elements";
+import React, {useState} from "react";
+import {Text} from "react-native-elements";
 import {ScrollView, SafeAreaView, View, } from "react-native";
-import ColorPicker from "../src/components/ColorPicker/ColorPicker";
+import SettingsColorPicker from "../../components/ColorPicker/SettingsColorPicker";
 
 // const [itemClicked, setItemClicked] = useState(-1)
 
 const heatmapHandler = () => {
     console.log('last item = ')
-    // return <ColorPicker/>
+    // return <SettingsColorPicker/>
 }
 
 
@@ -17,9 +17,9 @@ const items = [
         title: 'Heatmap Colors',
         description: 'change the gradients of the heatmap colors',
         onPress: heatmapHandler,
-        jsx: <ColorPicker props={true}/>
+        jsx: <SettingsColorPicker props={true}/>
     },
-    {id: 2, title: 'Titel 1', description: 'Info about title 1', jsx: <ColorPicker props={true}/>}
+    {id: 2, title: 'Titel 1', description: 'Info about title 1', jsx: <SettingsColorPicker props={true}/>}
 ]
 let test = false
 const setupHandler = (item) => {

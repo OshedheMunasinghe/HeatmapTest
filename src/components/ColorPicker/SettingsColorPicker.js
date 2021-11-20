@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import {View} from "react-native";
 import {Button, Overlay, Text, Card, Chip} from 'react-native-elements';
+// import ColorPicker from 'react-native-wheel-color-picker'
 
 const colors = ['darkgreen', 'lightgreen', 'yellow', 'orange', 'red']
-const ColorPicker = ({props}) => {
+const SettingsColorPicker = ({props}) => {
     const [visible, setVisible] = useState(props);
 
     const toggleOverlay = () => {
@@ -35,4 +36,4 @@ const ColorPicker = ({props}) => {
         </View>
     );
 };
-export default ColorPicker
+export default SettingsColorPicker
