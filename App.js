@@ -11,8 +11,6 @@ export default function App() {
     return (
         <NavigationContainer>
             <Stack.Navigator>
-
-                <Stack.Screen name="Color" component={SettingsColorPicker}/>
                 <Stack.Screen name="Settings" component={SettingScreen}/>
                 <Stack.Screen
                     name="Map"

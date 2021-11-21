@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {View} from "react-native";
-import {Button, Card} from 'react-native-elements';
+import {Button, Card, Overlay} from 'react-native-elements';
 
 
 const SettingsColorPicker = ({props}) => {
@@ -62,28 +62,33 @@ const SettingsColorPicker = ({props}) => {
             return list
         }
 
+        const saveColors = () => {
+            console.log(buttonColors)
+            toggleOverlay()
+        }
 
         return (
-            <View>
-                {/*<Overlay isVisible={visible} onBackdropPress={toggleOverlay}>*/}
-                <Card containerStyle={{minHeight: '90%', borderRadius: 8}}>
-                    <Card.Title>CHOOSE COLOR</Card.Title>
-                    {/* * color picker*/}
-                    <View style={{top: 28, minHeight: 64}}>
-                        <View style={{minHeight: "8%", bottom: 32, flexDirection: "row"}}>
-                            {pickedButton !== -1 && generateHueButtons()}
+            <View style={{flex: 1, alignItems: 'center', flexDirection: 'row',}}>
+                <Overlay isVisible={visible} onBackdropPress={toggleOverlay} overlayStyle={{width: '90%'}}>
+                    <Card containerStyle={{minHeight: '40%', borderRadius: 8}}>
+                        <Card.Title>CHOOSE COLOR</Card.Title>
+                        {/* * color picker*/}
+                        <View style={{top: 28, minHeight: 64}}>
+                            <View style={{minHeight: "8%", bottom: 32, flexDirection: "row"}}>
+                                {pickedButton !== -1 && generateHueButtons()}
+                            </View>
                         </View>
-                    </View>
 
-                    <View style={{flexDirection: "row", justifyContent: "space-evenly"}}>
-                        {generatePaletteButtons()}
-                    </View>
-                    <View style={{flexDirection: "row", justifyContent: "center", top: 18}}>
-                        <Button title={'SPARA'} buttonStyle={{margin: 8, padding: 16}} disabled={saveButtonDisabled}
-                                onPress={() => console.log(buttonColors)}/>
-                        <Button title={'AVBRYT'} buttonStyle={{margin: 8, padding: 16}}/>
-                    </View>
-                </Card>
+                        <View style={{flexDirection: "row", justifyContent: "space-evenly"}}>
+                            {generatePaletteButtons()}
+                        </View>
+                        <View style={{flexDirection: "row", justifyContent: "center", top: 18}}>
+                            <Button title={'SPARA'} buttonStyle={{margin: 8, padding: 16}} disabled={saveButtonDisabled}
+                                    onPress={saveColors}/>
+                            <Button title={'AVBRYT'} buttonStyle={{margin: 8, padding: 16}} onPress={toggleOverlay}/>
+                        </View>
+                    </Card>
+                </Overlay>
             </View>
         );
     }
