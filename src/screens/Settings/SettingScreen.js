@@ -14,12 +14,12 @@ const heatmapHandler = () => {
 const items = [
     {
         id: 1,
-        title: 'Heatmap Colors',
-        description: 'change the gradients of the heatmap colors',
+        title: 'Heatmap färger',
+        description: 'Byt färger på heatmap i kartan',
         onPress: heatmapHandler,
         jsx: <SettingsColorPicker props={true}/>
     },
-    {id: 2, title: 'Titel 1', description: 'Info about title 1', jsx: <SettingsColorPicker props={true}/>}
+    {id: 2, title: 'Byt Kartstil', description: 'Välj färgtema på kartan', jsx: <SettingsColorPicker props={true}/>}
 ]
 let test = false
 const setupHandler = (item) => {
