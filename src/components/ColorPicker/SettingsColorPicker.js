@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react';
 import {View} from "react-native";
 import {Button, Card} from 'react-native-elements';
 import ColorPicker from 'react-native-wheel-color-picker'
+import AppLoading from 'expo-app-loading';
+import { useFonts } from 'expo-font';
 
 const colors = ['#006400', '#90ee90', '#ffff00', '#ffa500', '#ff0000']
 const SettingsColorPicker = ({props}) => {
