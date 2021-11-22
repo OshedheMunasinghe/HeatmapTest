@@ -5,13 +5,16 @@ import {
     View,
     Dimensions,
     TouchableOpacity,
-    ActivityIndicator, Platform, ToastAndroid
+    ActivityIndicator,
+    Platform,
+    ToastAndroid,
 } from 'react-native'
 import * as Location from 'expo-location'
 import MapView, { Heatmap } from 'react-native-maps'
 // import NetInfoDisplay from '../components/NetInfoDisplay'
 import { Button, Card } from "react-native-elements";
 import NetInfoDisplay from '../../components/NetInfoDisplay/NetInfoDisplay';
+import SpeedOptions from '../../components/SpeedOptions/SpeedOptions'
 
 const mapStyle = require('../../styles/MapStyle/MapStyle.json')
 const MapScreen = () => {
@@ -38,7 +41,6 @@ const MapScreen = () => {
         })()
     }, [])
 
-
     const changeMapType = () => {
         if (mapType === 'standard') {
             setMapType('satellite')
@@ -49,25 +51,31 @@ const MapScreen = () => {
 
     const recording = async () => {
         if (Platform.OS === 'android') {
-            ToastAndroid.show('Inspelningen har startat', ToastAndroid.SHORT);
+            ToastAndroid.show('Inspelningen har startat', ToastAndroid.SHORT)
         }
         setRec(true)
 
-        const client = await Location.watchPositionAsync({
-            accuracy: Location.Accuracy.Highest,
-            distanceInterval: 1,
-            timeInterval: 1000,
-        }, (loc) => {
-            let num = Math.floor(Math.random() * (99 - 20) + 20)
-            let newValue = { latitude: loc.coords.latitude, longitude: loc.coords.longitude, weight: num }
-            setPoints(oldArray => [...oldArray, newValue])
-            console.log(loc.coords.latitude, loc.coords.longitude, num)
-        })
+        const client = await Location.watchPositionAsync(
+            {
+                accuracy: Location.Accuracy.Highest,
+                distanceInterval: 1,
+                timeInterval: 1000,
+            },
+            (loc) => {
+                let newValue = {
+                    latitude: loc.coords.latitude,
+                    longitude: loc.coords.longitude,
+                    weight: 1,
+                }
+                setPoints((oldArray) => [...oldArray, newValue])
+                console.log(loc.coords.latitude, loc.coords.longitude)
+            },
+        )
         return setAsd(client)
     }
     const stop = async () => {
         if (Platform.OS === 'android') {
-            ToastAndroid.show('Inspelningen har stoppat', ToastAndroid.SHORT);
+            ToastAndroid.show('Inspelningen har stoppat', ToastAndroid.SHORT)
         }
         setRec(false)
         console.log('Stoppad inspelning')
@@ -77,18 +85,21 @@ const MapScreen = () => {
 
     return (
         <View style={styles.container}>
-            {/* <NetInfoDisplay /> */}
-            {isLoading ? (<ActivityIndicator style={styles.map} size='large' />) : (
+            {/*<NetInfoDisplay />*/}
+
+            {isLoading ? (
+                <ActivityIndicator style={styles.map} size="large" />
+            ) : (
                 <MapView
                     style={styles.map}
                     showsUserLocation={true}
                     showsMyLocationButton={true}
-                    provider='google'
+                    provider="google"
                     initialRegion={{
                         latitude: location.latitude,
                         longitude: location.longitude,
                         latitudeDelta: 0.0922,
-                        longitudeDelta: 0.0421
+                        longitudeDelta: 0.0421,
                     }}
                     mapType={mapType}
                     customMapStyle={mapStyle}
@@ -98,33 +109,47 @@ const MapScreen = () => {
                             latitude: location.latitude,
                             longitude: location.longitude,
                             latitudeDelta: 0.0922,
-                            longitudeDelta: 0.0421
+                            longitudeDelta: 0.0421,
                         }}
                         points={points}
-                        radius={50}
+                        radius={30}
                         gradient={{
                             colors: ['darkgreen', 'lightgreen', 'yellow', 'orange', 'red'],
                             startPoints: [0.01, 0.04, 0.1, 0.45, 0.5],
-                            // colors: ['red', 'orange', 'yellow', 'lightgreen', 'darkgreen'],
-                            // startPoints: [0.2, 0.25, 0.3, 0.4, 0.7],
-
-                            colorMapSize: 200
+                            colorMapSize: 200,
                         }}
                     />
-                </MapView>)}
-
-
+                </MapView>
+            )}
+            <SpeedOptions mapTypeProps={{ mapType, setMapType }} />
             <View style={styles.buttonContainer}>
-                {!rec ?
-                    <Button title={'■'}
-                        buttonStyle={{ backgroundColor: "#D3D3D3", borderRadius: 16, width: 62, height: 62, }}
-                        titleStyle={{ color: "red", fontSize: 23, }} onPress={() => recording()} /> :
-                    <Button title={'●'}
-                        buttonStyle={{ backgroundColor: "#D3D3D3", borderRadius: 16, width: 62, height: 62, }}
-                        titleStyle={{ color: "black", fontSize: 23, }} onPress={() => stop()} />
-                }
-
+                {!rec ? (
+                    <Button
+                        title={'■'}
+                        buttonStyle={{
+                            backgroundColor: '#D3D3D3',
+                            borderRadius: 16,
+                            width: 62,
+                            height: 62,
+                        }}
+                        titleStyle={{ color: 'green', fontSize: 23 }}
+                        onPress={() => recording()}
+                    />
+                ) : (
+                    <Button
+                        title={'●'}
+                        buttonStyle={{
+                            backgroundColor: '#D3D3D3',
+                            borderRadius: 16,
+                            width: 62,
+                            height: 62,
+                        }}
+                        titleStyle={{ color: 'red', fontSize: 23 }}
+                        onPress={() => stop()}
+                    />
+                )}
             </View>
+
             <View style={styles.cardView}>
                 {cardVisible ? (
                     <Card containerStyle={styles.card}>
@@ -135,7 +160,6 @@ const MapScreen = () => {
 
                     </Card>) : (null)}
             </View>
-
 
             <View style={styles.chipView}>
                 <TouchableOpacity
@@ -174,6 +198,14 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    speedContainer: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'flex-start',
+        justifyContent: 'center',
+        marginBottom: 50,
+        padding: 30,
+    },
     map: {
         flex: 1,
         width: Dimensions.get('window').width,
@@ -204,7 +236,6 @@ const styles = StyleSheet.create({
         position: 'absolute',
         bottom: 38,
         paddingHorizontal: 10,
-
     },
     button: {
         borderRadius: 20,
@@ -230,5 +261,4 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         justifyContent: 'center',
     },
-
 })
