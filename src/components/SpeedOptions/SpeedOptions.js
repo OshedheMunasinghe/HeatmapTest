@@ -24,6 +24,7 @@ const SpeedOptions = (props) => {
 			onClose={() => setOpen(!open)}
 		>
 			<SpeedDial.Action
+				titleStyle={{fontFamily: "GenosR"}}
 				color="#D3D3D3"
 				icon={{ name: 'map', color: 'black' }}
 				title="Dashboard"
