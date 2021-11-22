@@ -7,7 +7,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const SettingsColorPicker = ({props}) => {
         const [visible, setVisible] = useState(props);
         const [pickedButton, setPickedButton] = useState(-1)
-        const [buttonColors, setButtonColors] = useState([])
+        const [buttonColors, setButtonColors] = useState(['#0E0', '#0D0', 'yellow', 'orange', 'red'])
         const [saveButtonDisabled, setSaveButtonDisabled] = useState(true)
 
         const toggleOverlay = () => {
@@ -31,7 +31,8 @@ const SettingsColorPicker = ({props}) => {
                     setButtonColors(heatmapColors)
                     console.log('Loaded colors from Async Storage')
                 }
-                setButtonColors(heatmapColors)
+                //setButtonColors(['lightgreen', 'lightgreen', 'yellow', 'orange', 'red']
+                
             }
             catch (e) {
                 console.log ('Error restoring data from async storage')
@@ -49,7 +50,7 @@ const SettingsColorPicker = ({props}) => {
     
         const generateHueButtons = () => {
             const list = []
-            const buttons = 32
+            const buttons = 48
             for (let i = 0; i < buttons; i++) {
                 const hsl = `hsl(${Math.round(i * 360.0 / buttons)},100%,50%)`
                 list.push(
@@ -65,7 +66,7 @@ const SettingsColorPicker = ({props}) => {
 
                                 }
                             }}
-                            buttonStyle={{padding: 0, height: 60, border: 0, backgroundColor: hsl}}/>
+                            buttonStyle={{padding: 0, height: 32, border: 0, backgroundColor: hsl}}/>
                     </View>)
             }
             return list
@@ -101,7 +102,7 @@ const SettingsColorPicker = ({props}) => {
                         {/* * color picker*/}
                         <View style={{top: 28, minHeight: 64}}>
                             <View style={{minHeight: "8%", bottom: 32, flexDirection: "row"}}>
-                                {pickedButton !== -1 && generateHueButtons()}
+                                {generateHueButtons()}
                             </View>
                         </View>
 
