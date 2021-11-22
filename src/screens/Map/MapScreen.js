@@ -15,6 +15,7 @@ import MapView, {Heatmap} from 'react-native-maps'
 import {Button, Card} from "react-native-elements";
 import NetInfoDisplay from '../../components/NetInfoDisplay/NetInfoDisplay';
 import SpeedOptions from '../../components/SpeedOptions/SpeedOptions'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const mapStyle = require('../../styles/MapStyle/MapStyle.json')
 const MapScreen = () => {
@@ -26,10 +27,12 @@ const MapScreen = () => {
     const [rec, setRec] = useState(false)
     const [asd, setAsd] = useState()
     const [cardVisible, setCardVisible] = useState(false)
+    const [heatmapGradient, setHeatmapGradient] = useState(['lightgreen', 'lightgreen', 'yellow', 'orange', 'red'])
 
     useEffect(() => {
         (async () => {
             setIsLoading(true)
+            restoreFromAsyncStorage()   // Restore saved Heatmap gradient
             let {status} = await Location.requestForegroundPermissionsAsync()
             if (status !== 'granted') {
                 return
@@ -41,6 +44,32 @@ const MapScreen = () => {
         })()
     }, [])
 
+    const restoreFromAsyncStorage = async () => {
+        try {
+            /* Heatmap gradient colors */
+            const json = await AsyncStorage.getItem('@heatmap_colors')
+            if (json != null) {
+                const loadedColors = JSON.parse(json)
+                setHeatmapGradient(loadedColors)
+                console.log('Restored from Async Storage')
+            }
+        }
+        catch (e) {
+            console.log ('Error restoring data from async storage')
+        }
+    }
+    
+    const saveToAsyncStorage = async () => {
+        try {
+            /* Heatmap gradient colors */
+            await AsyncStorage.setItem('@heatmap_colors', JSON.stringify(heatmapGradient))
+            console.log('Saved to Async Storage')
+        }
+        catch (e) {
+            console.log ('Error saving data to async storage')
+        }
+    }
+    
     const changeMapType = () => {
         if (mapType === 'standard') {
             setMapType('satellite')
@@ -114,7 +143,7 @@ const MapScreen = () => {
                         points={points}
                         radius={30}
                         gradient={{
-                            colors: ['darkgreen', 'lightgreen', 'yellow', 'orange', 'red'],
+                            colors: heatmapGradient,
                             startPoints: [0.01, 0.04, 0.1, 0.45, 0.5],
                             colorMapSize: 200,
                         }}
