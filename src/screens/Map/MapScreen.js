@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, {useState, useEffect} from 'react'
 import {
     StyleSheet,
     Text,
@@ -10,19 +10,19 @@ import {
     ToastAndroid,
 } from 'react-native'
 import * as Location from 'expo-location'
-import MapView, { Heatmap } from 'react-native-maps'
+import MapView, {Heatmap} from 'react-native-maps'
 // import NetInfoDisplay from '../components/NetInfoDisplay'
-import { Button, Card } from "react-native-elements";
+import {Button, Card} from "react-native-elements";
 import NetInfoDisplay from '../../components/NetInfoDisplay/NetInfoDisplay';
 import SpeedOptions from '../../components/SpeedOptions/SpeedOptions'
 
 const mapStyle = require('../../styles/MapStyle/MapStyle.json')
 const MapScreen = () => {
     const [mapType, setMapType] = useState('standard')
-    const [location, setLocation] = useState({ latitude: null, longitude: null })
+    const [location, setLocation] = useState({latitude: null, longitude: null})
     const [errorMsg, setErrorMsg] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
-    const [points, setPoints] = useState([{ latitude: 1, longitude: 1, weight: 1 }])
+    const [points, setPoints] = useState([{latitude: 1, longitude: 1, weight: 1}])
     const [rec, setRec] = useState(false)
     const [asd, setAsd] = useState()
     const [cardVisible, setCardVisible] = useState(false)
@@ -30,12 +30,12 @@ const MapScreen = () => {
     useEffect(() => {
         (async () => {
             setIsLoading(true)
-            let { status } = await Location.requestForegroundPermissionsAsync()
+            let {status} = await Location.requestForegroundPermissionsAsync()
             if (status !== 'granted') {
                 return
             }
             let location = await Location.getCurrentPositionAsync({})
-            setLocation({ latitude: location.coords.latitude, longitude: location.coords.longitude })
+            setLocation({latitude: location.coords.latitude, longitude: location.coords.longitude})
             console.log(location)
             setIsLoading(false)
         })()
@@ -88,7 +88,7 @@ const MapScreen = () => {
             {/*<NetInfoDisplay />*/}
 
             {isLoading ? (
-                <ActivityIndicator style={styles.map} size="large" />
+                <ActivityIndicator style={styles.map} size="large"/>
             ) : (
                 <MapView
                     style={styles.map}
@@ -121,21 +121,9 @@ const MapScreen = () => {
                     />
                 </MapView>
             )}
-            <SpeedOptions mapTypeProps={{ mapType, setMapType }} />
+            <SpeedOptions mapTypeProps={{mapType, setMapType}}/>
             <View style={styles.buttonContainer}>
                 {!rec ? (
-                    <Button
-                        title={'■'}
-                        buttonStyle={{
-                            backgroundColor: '#D3D3D3',
-                            borderRadius: 16,
-                            width: 62,
-                            height: 62,
-                        }}
-                        titleStyle={{ color: 'green', fontSize: 23 }}
-                        onPress={() => recording()}
-                    />
-                ) : (
                     <Button
                         title={'●'}
                         buttonStyle={{
@@ -144,8 +132,20 @@ const MapScreen = () => {
                             width: 62,
                             height: 62,
                         }}
-                        titleStyle={{ color: 'red', fontSize: 23 }}
+                        titleStyle={{color: 'red', fontSize: 23}}
                         onPress={() => stop()}
+                    />
+                ) : (
+                    <Button
+                        title={'■'}
+                        buttonStyle={{
+                            backgroundColor: '#D3D3D3',
+                            borderRadius: 16,
+                            width: 62,
+                            height: 62,
+                        }}
+                        titleStyle={{color: 'green', fontSize: 23}}
+                        onPress={() => recording()}
                     />
                 )}
             </View>
@@ -154,9 +154,9 @@ const MapScreen = () => {
                 {cardVisible ? (
                     <Card containerStyle={styles.card}>
                         <Card.Title style={styles.textStyle}>Connection Details:</Card.Title>
-                        <Card.Divider />
+                        <Card.Divider/>
 
-                        <NetInfoDisplay />
+                        <NetInfoDisplay/>
 
                     </Card>) : (null)}
             </View>
@@ -178,7 +178,9 @@ const MapScreen = () => {
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={styles.button}
-                    onPress={() => { !cardVisible ? setCardVisible(true) : setCardVisible(false) }}
+                    onPress={() => {
+                        !cardVisible ? setCardVisible(true) : setCardVisible(false)
+                    }}
                 >
                     <Text style={styles.textStyle}>Details</Text>
                 </TouchableOpacity>
@@ -220,7 +222,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 10,
         height: 35,
         shadowColor: '#ccc',
-        shadowOffset: { width: 0, height: 3 },
+        shadowOffset: {width: 0, height: 3},
         shadowOpacity: 0.5,
         shadowRadius: 5,
         elevation: 10,
