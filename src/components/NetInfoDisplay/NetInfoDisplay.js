@@ -55,53 +55,53 @@ const NetInfoDisplay = () => {
 
 	return (
 		<View style={styles.container}>
-			<Text>
+			<Text style={styles.textStyle}>
 				Connection Status :{' '}
 				{state.connectionStatus ? 'Connected' : 'Disconnected'}
 			</Text>
-			<Text>Connection Type : {state.connectionType}</Text>
-			<Text>
+			<Text style={styles.textStyle}>Connection Type : {state.connectionType}</Text>
+			<Text style={styles.textStyle}>
 				Internet Reachable : {state.connectionReachable ? 'YES' : 'NO'}
 			</Text>
-			<Text>Wifi Enabled : {state.connectionWifiEnabled ? 'YES' : 'NO'}</Text>
-			<Text>
+			<Text style={styles.textStyle}>Wifi Enabled : {state.connectionWifiEnabled ? 'YES' : 'NO'}</Text>
+			<Text style={styles.textStyle}>
 				{'\n'}Connection Details : {'\n'}
 				{state.connectionType == 'wifi'
 					? (state.connectionDetails.isConnectionExpensive
-							? 'Connection Expensive: YES'
-							: 'Connection Expensive: NO') +
-					  '\n' +
-					  'SSID: ' +
-					  state.connectionDetails.ssid +
-					  '\n' +
-					  'BSSID: ' +
-					  state.connectionDetails.bssid +
-					  '\n' +
-					  'Strength: ' +
-					  state.connectionDetails.strength +
-					  '\n' +
-					  'Ip Address: ' +
-					  state.connectionDetails.ipAddress +
-					  '\n' +
-					  'Subnet: ' +
-					  state.connectionDetails.subnet +
-					  '\n' +
-					  'Frequency: ' +
-					  state.connectionDetails.frequency
+						? 'Connection Expensive: YES'
+						: 'Connection Expensive: NO') +
+					'\n' +
+					'SSID: ' +
+					state.connectionDetails.ssid +
+					'\n' +
+					'BSSID: ' +
+					state.connectionDetails.bssid +
+					'\n' +
+					'Strength: ' +
+					state.connectionDetails.strength +
+					'\n' +
+					'Ip Address: ' +
+					state.connectionDetails.ipAddress +
+					'\n' +
+					'Subnet: ' +
+					state.connectionDetails.subnet +
+					'\n' +
+					'Frequency: ' +
+					state.connectionDetails.frequency
 					: state.connectionType == 'cellular'
-					? (state.connectionDetails.isConnectionExpensive
+						? (state.connectionDetails.isConnectionExpensive
 							? 'Connection Expensive: YES'
 							: 'Connection Expensive: NO') +
-					  '\n' +
-					  'cellularGeneration: ' +
-					  state.connectionDetails.cellularGeneration +
-					  '\n' +
-					  'Signal Strength: ' +
-					  randomNumber +
-					  '\n' +
-					  'carrier: ' +
-					  state.connectionDetails.carrier
-					: 'Check your connection'}
+						'\n' +
+						'cellularGeneration: ' +
+						state.connectionDetails.cellularGeneration +
+						'\n' +
+						'Signal Strength: ' +
+						randomNumber +
+						'\n' +
+						'carrier: ' +
+						state.connectionDetails.carrier
+						: 'Check your connection'}
 			</Text>
 		</View>
 	)
@@ -112,11 +112,15 @@ export default NetInfoDisplay
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: '#fff',
+		// backgroundColor: '#fff',
 		alignItems: 'flex-start',
 		justifyContent: 'center',
 		flexDirection: 'column',
-		padding: 10,
-		margin: 20,
+		// padding: 10,
+		// margin: 20,
+	},
+	textStyle: {
+		color: "white",
+		fontWeight: "bold",
 	},
 })

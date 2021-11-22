@@ -2609,7 +2609,7 @@
     "expo-modules-core" "~0.4.4"
     "uuid" "^3.4.0"
 
-"expo-font@~10.0.3":
+"expo-font@^10.0.3", "expo-font@~10.0.3":
   "integrity" "sha512-xM5oqIduGvJ+qbsZHjMNNt+3hhjOMTunHUtOx5rAmW/D1ZVdfLwjDwOyWBVkH8ChoBRAZy9gsC2cRs7naw8NIw=="
   "resolved" "https://registry.npmjs.org/expo-font/-/expo-font-10.0.3.tgz"
   "version" "10.0.3"
