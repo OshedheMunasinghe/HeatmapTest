@@ -11,6 +11,7 @@ import * as Location from 'expo-location'
 import MapView, {Heatmap} from 'react-native-maps'
 // import NetInfoDisplay from '../components/NetInfoDisplay'
 import {Button} from "react-native-elements";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const mapStyle = require('../../styles/MapStyle/MapStyle.json')
 const MapScreen = () => {
@@ -21,9 +22,11 @@ const MapScreen = () => {
     const [points, setPoints] = useState([{latitude: 1, longitude: 1, weight: 1}])
     const [rec, setRec] = useState(false)
     const [asd, setAsd] = useState()
+    const [heatmapGradient, setHeatmapGradient] = useState(['lightgreen', 'lightgreen', 'yellow', 'orange', 'red'])
 
     useEffect(() => {
         (async () => {
+            restoreFromAsyncStorage()   // Restore saved Heatmap gradient
             setIsLoading(true)
             let {status} = await Location.requestForegroundPermissionsAsync()
             if (status !== 'granted') {
@@ -36,6 +39,31 @@ const MapScreen = () => {
         })()
     }, [])
 
+    const restoreFromAsyncStorage = async () => {
+        try {
+            /* Heatmap gradient colors */
+            const json = await AsyncStorage.getItem('@heatmap_colors')
+            if (json != null) {
+                const loadedColors = JSON.parse(json)
+                setHeatmapGradient(loadedColors)
+                console.log('Restored from Async Storage')
+            }
+        }
+        catch (e) {
+            console.log ('Error restoring data from async storage')
+        }
+    }
+
+    const saveToAsyncStorage = async () => {
+        try {
+            /* Heatmap gradient colors */
+            await AsyncStorage.setItem('@heatmap_colors', JSON.stringify(heatmapGradient))
+            console.log('Saved to Async Storage')
+        }
+        catch (e) {
+            console.log ('Error saving data to async storage')
+        }
+    }
 
     const changeMapType = () => {
         if (mapType === 'standard') {
@@ -100,7 +128,7 @@ const MapScreen = () => {
                         points={points}
                         radius={50}
                         gradient={{
-                            colors: ['darkgreen', 'lightgreen', 'yellow', 'orange', 'red'],
+                            colors: heatmapGradient,
                             startPoints: [0.01, 0.04, 0.1, 0.45, 0.5],
                             colorMapSize: 200
                         }}
