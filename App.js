@@ -1,21 +1,26 @@
-import React from 'react'
-import {StyleSheet, Text, View} from 'react-native'
+import * as React from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import SettingsColorPicker from "./src/components/ColorPicker/SettingsColorPicker";
+import SettingScreen from "./src/screens/Settings/SettingScreen";
 import MapScreen from "./src/screens/Map/MapScreen";
 
+const Stack = createNativeStackNavigator();
 
 export default function App() {
     return (
-        <View style={styles.container}>
-            <MapScreen/>
-        </View>
+        <NavigationContainer>
+            <Stack.Navigator screenOptions={{headerShown: false}}>
+                <Stack.Screen
+                    name="Map"
+                    component={MapScreen}
+                    options={{title: 'Map Screen'}}
+
+                />
+                <Stack.Screen name="Settings" component={SettingScreen}/>
+            </Stack.Navigator>
+        </NavigationContainer>
     )
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-})
+
