@@ -1,13 +1,13 @@
-import React, {useState, useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {
+    ActivityIndicator,
+    Dimensions,
+    Platform,
     StyleSheet,
     Text,
-    View,
-    Dimensions,
-    TouchableOpacity,
-    ActivityIndicator,
-    Platform,
     ToastAndroid,
+    TouchableOpacity,
+    View,
 } from 'react-native'
 import * as Location from 'expo-location'
 import MapView, {Heatmap} from 'react-native-maps'
@@ -162,7 +162,7 @@ const MapScreen = () => {
                             height: 62,
                         }}
                         titleStyle={{color: 'red', fontSize: 23}}
-                        onPress={() => stop()}
+                        onPress={() => recording()}
                     />
                 ) : (
                     <Button
@@ -174,7 +174,7 @@ const MapScreen = () => {
                             height: 62,
                         }}
                         titleStyle={{color: 'green', fontSize: 23}}
-                        onPress={() => recording()}
+                        onPress={() => stop()}
                     />
                 )}
             </View>
