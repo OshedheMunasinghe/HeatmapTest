@@ -27,7 +27,7 @@ const SpeedOptions = (props) => {
 				color="#D3D3D3"
 				icon={{ name: 'map', color: 'black' }}
 				title="Dashboard"
-				onPress={() => console.log('Showing Dashboard')}
+				onPress={() => alert('-- Dashboard --')}
 			/>
 			<SpeedDial.Action
 				color="#D3D3D3"
@@ -39,7 +39,7 @@ const SpeedOptions = (props) => {
 				color="#D3D3D3"
 				icon={{ name: 'settings', color: 'black' }}
 				title="Heatmap Colors"
-				onPress={() => console.log('Change Colors')}
+				onPress={() => alert('-- Color Picker --')}
 			/>
 		</SpeedDial>
 	)
