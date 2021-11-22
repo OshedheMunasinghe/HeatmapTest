@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import {
     StyleSheet,
     Text,
@@ -8,29 +8,31 @@ import {
     ActivityIndicator, Platform, ToastAndroid
 } from 'react-native'
 import * as Location from 'expo-location'
-import MapView, {Heatmap} from 'react-native-maps'
+import MapView, { Heatmap } from 'react-native-maps'
 // import NetInfoDisplay from '../components/NetInfoDisplay'
-import {Button} from "react-native-elements";
+import { Button, Card } from "react-native-elements";
+import NetInfoDisplay from '../../components/NetInfoDisplay/NetInfoDisplay';
 
 const mapStyle = require('../../styles/MapStyle/MapStyle.json')
 const MapScreen = () => {
     const [mapType, setMapType] = useState('standard')
-    const [location, setLocation] = useState({latitude: null, longitude: null})
+    const [location, setLocation] = useState({ latitude: null, longitude: null })
     const [errorMsg, setErrorMsg] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
-    const [points, setPoints] = useState([{latitude: 1, longitude: 1, weight: 1}])
+    const [points, setPoints] = useState([{ latitude: 1, longitude: 1, weight: 1 }])
     const [rec, setRec] = useState(false)
     const [asd, setAsd] = useState()
+    const [cardVisible, setCardVisible] = useState(false)
 
     useEffect(() => {
         (async () => {
             setIsLoading(true)
-            let {status} = await Location.requestForegroundPermissionsAsync()
+            let { status } = await Location.requestForegroundPermissionsAsync()
             if (status !== 'granted') {
                 return
             }
             let location = await Location.getCurrentPositionAsync({})
-            setLocation({latitude: location.coords.latitude, longitude: location.coords.longitude})
+            setLocation({ latitude: location.coords.latitude, longitude: location.coords.longitude })
             console.log(location)
             setIsLoading(false)
         })()
@@ -56,9 +58,10 @@ const MapScreen = () => {
             distanceInterval: 1,
             timeInterval: 1000,
         }, (loc) => {
-            let newValue = {latitude: loc.coords.latitude, longitude: loc.coords.longitude, weight: 1}
+            let num = Math.floor(Math.random() * (99 - 20) + 20)
+            let newValue = { latitude: loc.coords.latitude, longitude: loc.coords.longitude, weight: num }
             setPoints(oldArray => [...oldArray, newValue])
-            console.log(loc.coords.latitude, loc.coords.longitude)
+            console.log(loc.coords.latitude, loc.coords.longitude, num)
         })
         return setAsd(client)
     }
@@ -74,8 +77,8 @@ const MapScreen = () => {
 
     return (
         <View style={styles.container}>
-            {/*<NetInfoDisplay />*/}
-            {isLoading ? (<ActivityIndicator style={styles.map} size='large'/>) : (
+            {/* <NetInfoDisplay /> */}
+            {isLoading ? (<ActivityIndicator style={styles.map} size='large' />) : (
                 <MapView
                     style={styles.map}
                     showsUserLocation={true}
@@ -102,23 +105,37 @@ const MapScreen = () => {
                         gradient={{
                             colors: ['darkgreen', 'lightgreen', 'yellow', 'orange', 'red'],
                             startPoints: [0.01, 0.04, 0.1, 0.45, 0.5],
+                            // colors: ['red', 'orange', 'yellow', 'lightgreen', 'darkgreen'],
+                            // startPoints: [0.2, 0.25, 0.3, 0.4, 0.7],
+
                             colorMapSize: 200
                         }}
                     />
                 </MapView>)}
 
+
             <View style={styles.buttonContainer}>
                 {!rec ?
                     <Button title={'■'}
-                            buttonStyle={{backgroundColor: "#D3D3D3", borderRadius: 16, width: 62, height: 62,}}
-                            titleStyle={{color: "red", fontSize: 23,}} onPress={() => recording()}/> :
+                        buttonStyle={{ backgroundColor: "#D3D3D3", borderRadius: 16, width: 62, height: 62, }}
+                        titleStyle={{ color: "red", fontSize: 23, }} onPress={() => recording()} /> :
                     <Button title={'●'}
-                            buttonStyle={{backgroundColor: "#D3D3D3", borderRadius: 16, width: 62, height: 62,}}
-                            titleStyle={{color: "black", fontSize: 23,}} onPress={() => stop()}/>
+                        buttonStyle={{ backgroundColor: "#D3D3D3", borderRadius: 16, width: 62, height: 62, }}
+                        titleStyle={{ color: "black", fontSize: 23, }} onPress={() => stop()} />
                 }
 
-
             </View>
+            <View style={styles.cardView}>
+                {cardVisible ? (
+                    <Card containerStyle={styles.card}>
+                        <Card.Title style={styles.textStyle}>Connection Details:</Card.Title>
+                        <Card.Divider />
+
+                        <NetInfoDisplay />
+
+                    </Card>) : (null)}
+            </View>
+
 
             <View style={styles.chipView}>
                 <TouchableOpacity
@@ -135,7 +152,14 @@ const MapScreen = () => {
                 <TouchableOpacity style={styles.chipsItem} onPress={() => setPoints([])}>
                     <Text>Radera</Text>
                 </TouchableOpacity>
+                <TouchableOpacity
+                    style={styles.button}
+                    onPress={() => { !cardVisible ? setCardVisible(true) : setCardVisible(false) }}
+                >
+                    <Text style={styles.textStyle}>Details</Text>
+                </TouchableOpacity>
             </View>
+
         </View>
 
     )
@@ -164,7 +188,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 10,
         height: 35,
         shadowColor: '#ccc',
-        shadowOffset: {width: 0, height: 3},
+        shadowOffset: { width: 0, height: 3 },
         shadowOpacity: 0.5,
         shadowRadius: 5,
         elevation: 10,
@@ -180,5 +204,31 @@ const styles = StyleSheet.create({
         position: 'absolute',
         bottom: 38,
         paddingHorizontal: 10,
-    }
+
+    },
+    button: {
+        borderRadius: 20,
+        padding: 10,
+        elevation: 2,
+        backgroundColor: 'rgba(52, 52, 52, 0.8)',
+    },
+    textStyle: {
+        color: "white",
+        fontWeight: "bold",
+        textAlign: "center"
+    },
+    cardView: {
+        flexDirection: 'row',
+        position: 'absolute',
+        top: Platform.OS === 'ios' ? 110 : 100,
+        paddingHorizontal: 10
+    },
+    card: {
+        backgroundColor: 'rgba(52, 52, 52, 0.8)',
+        padding: 20,
+        marginVertical: 10,
+        borderRadius: 10,
+        justifyContent: 'center',
+    },
+
 })
