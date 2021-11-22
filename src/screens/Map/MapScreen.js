@@ -127,18 +127,7 @@ const MapScreen = () => {
 			<SpeedOptions mapTypeProps={{ mapType, setMapType }} />
 			<View style={styles.buttonContainer}>
 				{!rec ? (
-					<Button
-						title={'■'}
-						buttonStyle={{
-							backgroundColor: '#D3D3D3',
-							borderRadius: 16,
-							width: 62,
-							height: 62,
-						}}
-						titleStyle={{ color: 'green', fontSize: 23 }}
-						onPress={() => recording()}
-					/>
-				) : (
+
 					<Button
 						title={'●'}
 						buttonStyle={{
@@ -149,6 +138,18 @@ const MapScreen = () => {
 						}}
 						titleStyle={{ color: 'red', fontSize: 23 }}
 						onPress={() => stop()}
+					/>
+				) : (
+					<Button
+						title={'■'}
+						buttonStyle={{
+							backgroundColor: '#D3D3D3',
+							borderRadius: 16,
+							width: 62,
+							height: 62,
+						}}
+						titleStyle={{ color: 'green', fontSize: 23 }}
+						onPress={() => recording()}
 					/>
 				)}
 			</View>
