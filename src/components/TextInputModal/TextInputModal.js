@@ -8,27 +8,29 @@ const TextInputModal = (props) => {
 	const [textInput, setTextInput] = useState('')
 
 	const handleOnChangeText = () => {
-		let logs = props.visible.points
+		let logs = props.points.points
 
 		if (textInput.length < 1) {
 			ToastAndroid.show('Not a valid address', ToastAndroid.SHORT)
 			return null
 		}
-		if (logs.length < 1) {
+		if (props.points.points.length < 1) {
 			ToastAndroid.show('Nothing to send', ToastAndroid.SHORT)
+			return null
 		} else {
-			postLogs(logs)
+			postLogs()
 			toggleOverlay()
 		}
 	}
 
-	const postLogs = (props) => {
+	const postLogs = () => {
 		ToastAndroid.show('Sending..', ToastAndroid.SHORT)
 		axios
 			.post(textInput, props.logs)
 			.then(function (response) {
 				if (response.status === 200) {
 					ToastAndroid.show('Success!', ToastAndroid.SHORT)
+					props.points.setPoints([])
 				}
 			})
 			.catch(function (error) {

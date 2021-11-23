@@ -83,6 +83,11 @@ const MapScreen = ({ navigation }) => {
 	}
 
 	const recording = async () => {
+		if (Platform.OS === 'android') {
+			ToastAndroid.show('Inspelningen har startat', ToastAndroid.SHORT)
+		}
+
+		setRec(true)
 		const client = await Location.watchPositionAsync(
 			{
 				accuracy: Location.Accuracy.Highest,
@@ -188,7 +193,8 @@ const MapScreen = ({ navigation }) => {
 			{cardVisible ? <CardInfo /> : null}
 			{textInputVisible ? (
 				<TextInputModal
-					visible={{ textInputVisible, setTextInputVisible, points, setPoints }}
+					visible={{ textInputVisible, setTextInputVisible }}
+					points={{ points, setPoints }}
 				/>
 			) : null}
 
