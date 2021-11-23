@@ -11,10 +11,12 @@ import {
 } from 'react-native'
 import * as Location from 'expo-location'
 import MapView, { Heatmap } from 'react-native-maps'
-import { Button } from "react-native-elements";
+// import { Button } from "react-native-elements";
 import SpeedOptions from '../../components/SpeedOptions/SpeedOptions'
 import CardInfo from '../../components/CardInfo/CardInfo';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import RecordButton from '../../components/Buttons/RecordButton/RecordButton';
+import StopButton from '../../components/Buttons/StopButton/StopButton';
 
 const mapStyle = require('../../styles/MapStyle/MapStyle.json')
 const MapScreen = ({ navigation }) => {
@@ -145,6 +147,12 @@ const MapScreen = ({ navigation }) => {
             />
             <View style={styles.buttonContainer}>
                 {!rec ? (
+                    <RecordButton onPress={() => recording()} />
+                ) : (
+                    <StopButton onPress={() => stop()} />
+                )}
+
+                {/* {!rec ? (
                     <Button
                         title={'●'}
                         buttonStyle={{
@@ -168,7 +176,7 @@ const MapScreen = ({ navigation }) => {
                         titleStyle={{ color: 'green', fontSize: 23 }}
                         onPress={() => stop()}
                     />
-                )}
+                )} */}
             </View>
 
             {cardVisible ? (<CardInfo />) : (null)}
