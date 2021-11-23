@@ -13,11 +13,10 @@ const TextInputModal = (props) => {
 			<Overlay
 				isVisible={props.visible.textInputVisible}
 				onBackdropPress={toggleOverlay}
-				style={styles.test}
 			>
 				{/* <Card style={styles.card}> */}
-				<Text style={styles.test}>Post your result </Text>
-				<Input placeholder="Server address" />
+				<Text>Post your result </Text>
+				<Input placeholder="Server address" style={styles.test} />
 				<View style={styles.Button}>
 					<Button title="Cancel" onPress={toggleOverlay} />
 					<TouchableOpacity
@@ -35,10 +34,12 @@ const TextInputModal = (props) => {
 
 const styles = StyleSheet.create({
 	cardView: {
-		flexDirection: 'row',
+		flex: 1,
+		flexDirection: 'column',
 		position: 'absolute',
 		top: Platform.OS === 'ios' ? 110 : 100,
 		paddingHorizontal: 10,
+		backgroundColor: 'green',
 	},
 	textStyle: {
 		color: 'black',
