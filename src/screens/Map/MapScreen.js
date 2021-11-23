@@ -13,7 +13,7 @@ import * as Location from 'expo-location'
 import MapView, { Heatmap } from 'react-native-maps'
 import { Button } from "react-native-elements";
 import SpeedOptions from '../../components/SpeedOptions/SpeedOptions'
-import CardInfo from '../../components/Card/CardInfo';
+import CardInfo from '../../components/CardInfo/CardInfo';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const mapStyle = require('../../styles/MapStyle/MapStyle.json')
