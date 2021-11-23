@@ -13,6 +13,14 @@ const SpeedOptions = (props) => {
 		}
 	}
 
+	const showCard = (props) => {
+		if (props.cardProps.cardVisible === false) {
+			props.cardProps.setCardVisible(true)
+		} else if (props.cardProps.cardVisible === true) {
+			props.cardProps.setCardVisible(false)
+		}
+	}
+
 	return (
 		<SpeedDial
 			color="#D3D3D3"
@@ -24,11 +32,11 @@ const SpeedOptions = (props) => {
 			onClose={() => setOpen(!open)}
 		>
 			<SpeedDial.Action
-				titleStyle={{fontFamily: "GenosR"}}
+				titleStyle={{ fontFamily: "GenosR" }}
 				color="#D3D3D3"
 				icon={{ name: 'map', color: 'black' }}
 				title="Dashboard"
-				onPress={() => alert('-- Dashboard --')}
+				onPress={() => showCard(props)}
 			/>
 			<SpeedDial.Action
 				color="#D3D3D3"
@@ -40,7 +48,8 @@ const SpeedOptions = (props) => {
 				color="#D3D3D3"
 				icon={{ name: 'settings', color: 'black' }}
 				title="Heatmap Colors"
-				onPress={() => alert('-- Color Picker --')}
+				// onPress={() => alert('-- Color Picker --')}
+				onPress={() => { props.nav.navigate('Settings') }}
 			/>
 		</SpeedDial>
 	)
