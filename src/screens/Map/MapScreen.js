@@ -20,11 +20,10 @@ const mapStyle = require('../../styles/MapStyle/MapStyle.json')
 const MapScreen = ({ navigation }) => {
     const [mapType, setMapType] = useState('standard')
     const [location, setLocation] = useState({ latitude: null, longitude: null })
-    const [errorMsg, setErrorMsg] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
     const [points, setPoints] = useState([{ latitude: 1, longitude: 1, weight: 1 }])
     const [rec, setRec] = useState(false)
-    const [asd, setAsd] = useState()
+    const [position, setPosition] = useState()
     const [cardVisible, setCardVisible] = useState(true)
     const [heatmapGradient, setHeatmapGradient] = useState(['lightgreen', 'lightgreen', 'yellow', 'orange', 'red'])
 
@@ -91,7 +90,7 @@ const MapScreen = ({ navigation }) => {
                 console.log(loc.coords.latitude, loc.coords.longitude)
             },
         )
-        return setAsd(client)
+        return setPosition(client)
     }
     const stop = async () => {
         if (Platform.OS === 'android') {
@@ -100,7 +99,7 @@ const MapScreen = ({ navigation }) => {
         setRec(false)
         console.log('Stoppad inspelning')
         console.log(points)
-        await asd.remove()
+        await position.remove()
     }
 
     return (
