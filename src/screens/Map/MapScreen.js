@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
+	ActivityIndicator,
+	Dimensions,
+	Platform,
 	StyleSheet,
 	Text,
-	View,
-	Dimensions,
-	TouchableOpacity,
-	ActivityIndicator,
-	Platform,
 	ToastAndroid,
+	TouchableOpacity,
+	View,
 } from 'react-native'
 import * as Location from 'expo-location'
 import MapView, { Heatmap } from 'react-native-maps'
@@ -16,6 +16,7 @@ import { Button, Card } from 'react-native-elements'
 import NetInfoDisplay from '../../components/NetInfoDisplay/NetInfoDisplay'
 import SpeedOptions from '../../components/SpeedOptions/SpeedOptions'
 import TextInputModal from '../../components/TextInputModal/TextInputModal'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const mapStyle = require('../../styles/MapStyle/MapStyle.json')
 const MapScreen = () => {
@@ -31,9 +32,18 @@ const MapScreen = () => {
 	const [cardVisible, setCardVisible] = useState(false)
 	const [textInputVisible, setTextInputVisible] = useState(false)
 
+	const [heatmapGradient, setHeatmapGradient] = useState([
+		'lightgreen',
+		'lightgreen',
+		'yellow',
+		'orange',
+		'red',
+	])
+
 	useEffect(() => {
 		;(async () => {
 			setIsLoading(true)
+			restoreFromAsyncStorage() // Restore saved Heatmap gradient
 			let { status } = await Location.requestForegroundPermissionsAsync()
 			if (status !== 'granted') {
 				return
@@ -47,6 +57,33 @@ const MapScreen = () => {
 			setIsLoading(false)
 		})()
 	}, [])
+
+	const restoreFromAsyncStorage = async () => {
+		try {
+			/* Heatmap gradient colors */
+			const json = await AsyncStorage.getItem('@heatmap_colors')
+			if (json != null) {
+				const loadedColors = JSON.parse(json)
+				setHeatmapGradient(loadedColors)
+				console.log('Restored from Async Storage')
+			}
+		} catch (e) {
+			console.log('Error restoring data from async storage')
+		}
+	}
+
+	const saveToAsyncStorage = async () => {
+		try {
+			/* Heatmap gradient colors */
+			await AsyncStorage.setItem(
+				'@heatmap_colors',
+				JSON.stringify(heatmapGradient),
+			)
+			console.log('Saved to Async Storage')
+		} catch (e) {
+			console.log('Error saving data to async storage')
+		}
+	}
 
 	const changeMapType = () => {
 		if (mapType === 'standard') {
@@ -121,7 +158,7 @@ const MapScreen = () => {
 						points={points}
 						radius={30}
 						gradient={{
-							colors: ['darkgreen', 'lightgreen', 'yellow', 'orange', 'red'],
+							colors: heatmapGradient,
 							startPoints: [0.01, 0.04, 0.1, 0.45, 0.5],
 							colorMapSize: 200,
 						}}
@@ -139,18 +176,6 @@ const MapScreen = () => {
 			<View style={styles.buttonContainer}>
 				{!rec ? (
 					<Button
-						title={'■'}
-						buttonStyle={{
-							backgroundColor: '#D3D3D3',
-							borderRadius: 16,
-							width: 62,
-							height: 62,
-						}}
-						titleStyle={{ color: 'green', fontSize: 23 }}
-						onPress={() => recording()}
-					/>
-				) : (
-					<Button
 						title={'●'}
 						buttonStyle={{
 							backgroundColor: '#D3D3D3',
@@ -159,6 +184,18 @@ const MapScreen = () => {
 							height: 62,
 						}}
 						titleStyle={{ color: 'red', fontSize: 23 }}
+						onPress={() => recording()}
+					/>
+				) : (
+					<Button
+						title={'■'}
+						buttonStyle={{
+							backgroundColor: '#D3D3D3',
+							borderRadius: 16,
+							width: 62,
+							height: 62,
+						}}
+						titleStyle={{ color: 'green', fontSize: 23 }}
 						onPress={() => stop()}
 					/>
 				)}

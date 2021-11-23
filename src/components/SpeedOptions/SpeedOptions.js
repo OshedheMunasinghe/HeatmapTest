@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
-import { render } from 'react-dom'
 import { StyleSheet } from 'react-native'
 import { SpeedDial } from 'react-native-elements'
-import TextInputModal from '../TextInputModal/TextInputModal'
 
 const SpeedOptions = (props) => {
 	const [open, setOpen] = useState(false)

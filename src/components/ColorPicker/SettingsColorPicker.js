@@ -1,12 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import {View} from "react-native";
 import {Button, Card, Overlay} from 'react-native-elements';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 const SettingsColorPicker = ({props}) => {
         const [visible, setVisible] = useState(props);
         const [pickedButton, setPickedButton] = useState(-1)
-        const [buttonColors, setButtonColors] = useState(['#006400', '#ff0000', 'pink', 'purple', "gold"])
+        const [buttonColors, setButtonColors] = useState(['#0E0', '#0D0', 'yellow', 'orange', 'red'])
         const [saveButtonDisabled, setSaveButtonDisabled] = useState(true)
 
         const toggleOverlay = () => {
@@ -16,14 +17,40 @@ const SettingsColorPicker = ({props}) => {
         useEffect(() => {
             return () => {
                 setVisible(false)
-                console.log('bye ')
+                loadHeatmapColors()
+                console.log('USEEFFECT')
             };
         }, []);
 
-
+        const loadHeatmapColors = async () => {
+            try {
+                let heatmapColors = ['lightgreen', 'lightgreen', 'yellow', 'orange', 'red']
+                const json = await AsyncStorage.getItem('@heatmap_colors')
+                if (json != null) {
+                    heatmapColors = JSON.parse(json)
+                    setButtonColors(heatmapColors)
+                    console.log('Loaded colors from Async Storage')
+                }
+                //setButtonColors(['lightgreen', 'lightgreen', 'yellow', 'orange', 'red']
+                
+            }
+            catch (e) {
+                console.log ('Error restoring data from async storage')
+            }
+        }
+    
+        const saveHeatmapColors = async () => {
+            try {
+                await AsyncStorage.setItem('@heatmap_colors', JSON.stringify(buttonColors))
+            }
+            catch (e) {
+                console.log ('Error saving data to async storage')
+            }
+        }
+    
         const generateHueButtons = () => {
             const list = []
-            const buttons = 32
+            const buttons = 48
             for (let i = 0; i < buttons; i++) {
                 const hsl = `hsl(${Math.round(i * 360.0 / buttons)},100%,50%)`
                 list.push(
@@ -39,7 +66,7 @@ const SettingsColorPicker = ({props}) => {
 
                                 }
                             }}
-                            buttonStyle={{padding: 0, height: 60, border: 0, backgroundColor: hsl}}/>
+                            buttonStyle={{padding: 0, height: 32, border: 0, backgroundColor: hsl}}/>
                     </View>)
             }
             return list
@@ -63,7 +90,7 @@ const SettingsColorPicker = ({props}) => {
         }
 
         const saveColors = () => {
-            console.log(buttonColors)
+            saveHeatmapColors()
             toggleOverlay()
         }
 
@@ -75,12 +102,12 @@ const SettingsColorPicker = ({props}) => {
                         {/* * color picker*/}
                         <View style={{top: 28, minHeight: 64}}>
                             <View style={{minHeight: "8%", bottom: 32, flexDirection: "row"}}>
-                                {pickedButton !== -1 && generateHueButtons()}
+                                {generateHueButtons()}
                             </View>
                         </View>
 
                         <View style={{flexDirection: "row", justifyContent: "space-evenly"}}>
-                            {generatePaletteButtons()}
+                            {buttonColors && generatePaletteButtons()}
                         </View>
                         <View style={{flexDirection: "row", justifyContent: "center", top: 18}}>
                             <Button title={'SPARA'} buttonStyle={{margin: 8, padding: 16}} disabled={saveButtonDisabled}
