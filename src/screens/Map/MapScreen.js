@@ -214,7 +214,9 @@ const MapScreen = () => {
 				) : null}
 			</View>
 			{textInputVisible ? (
-				<TextInputModal visible={{ textInputVisible, setTextInputVisible }} />
+				<TextInputModal
+					visible={{ textInputVisible, setTextInputVisible, points, setPoints }}
+				/>
 			) : null}
 
 			<View style={styles.chipView}>
