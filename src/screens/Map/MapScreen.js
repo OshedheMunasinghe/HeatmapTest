@@ -11,27 +11,24 @@ import {
 } from 'react-native'
 import * as Location from 'expo-location'
 import MapView, { Heatmap } from 'react-native-maps'
-// import NetInfoDisplay from '../components/NetInfoDisplay'
-import { Button, Card } from 'react-native-elements'
-import NetInfoDisplay from '../../components/NetInfoDisplay/NetInfoDisplay'
+import { Button } from 'react-native-elements'
 import SpeedOptions from '../../components/SpeedOptions/SpeedOptions'
-import TextInputModal from '../../components/TextInputModal/TextInputModal'
+import CardInfo from '../../components/CardInfo/CardInfo'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import TextInputModal from '../../components/TextInputModal/TextInputModal'
 
 const mapStyle = require('../../styles/MapStyle/MapStyle.json')
-const MapScreen = () => {
+const MapScreen = ({ navigation }) => {
 	const [mapType, setMapType] = useState('standard')
 	const [location, setLocation] = useState({ latitude: null, longitude: null })
-	const [errorMsg, setErrorMsg] = useState(null)
 	const [isLoading, setIsLoading] = useState(true)
 	const [points, setPoints] = useState([
 		{ latitude: 1, longitude: 1, weight: 1 },
 	])
 	const [rec, setRec] = useState(false)
-	const [asd, setAsd] = useState()
-	const [cardVisible, setCardVisible] = useState(false)
+	const [position, setPosition] = useState()
+	const [cardVisible, setCardVisible] = useState(true)
 	const [textInputVisible, setTextInputVisible] = useState(false)
-
 	const [heatmapGradient, setHeatmapGradient] = useState([
 		'lightgreen',
 		'lightgreen',
@@ -85,20 +82,7 @@ const MapScreen = () => {
 		}
 	}
 
-	const changeMapType = () => {
-		if (mapType === 'standard') {
-			setMapType('satellite')
-		} else if (mapType === 'satellite') {
-			setMapType('standard')
-		}
-	}
-
 	const recording = async () => {
-		if (Platform.OS === 'android') {
-			ToastAndroid.show('Inspelningen har startat', ToastAndroid.SHORT)
-		}
-		setRec(true)
-
 		const client = await Location.watchPositionAsync(
 			{
 				accuracy: Location.Accuracy.Highest,
@@ -115,8 +99,9 @@ const MapScreen = () => {
 				console.log(loc.coords.latitude, loc.coords.longitude)
 			},
 		)
-		return setAsd(client)
+		return setPosition(client)
 	}
+
 	const stop = async () => {
 		if (Platform.OS === 'android') {
 			ToastAndroid.show('Inspelningen har stoppat', ToastAndroid.SHORT)
@@ -124,13 +109,11 @@ const MapScreen = () => {
 		setRec(false)
 		console.log('Stoppad inspelning')
 		console.log(points)
-		await asd.remove()
+		await position.remove()
 	}
 
 	return (
 		<View style={styles.container}>
-			{/*<NetInfoDisplay />*/}
-
 			{isLoading ? (
 				<ActivityIndicator style={styles.map} size="large" />
 			) : (
@@ -166,12 +149,13 @@ const MapScreen = () => {
 				</MapView>
 			)}
 			<SpeedOptions
-				speedOptionProps={{
+				mapTypeProps={{
 					mapType,
 					setMapType,
-					textInputVisible,
-					setTextInputVisible,
 				}}
+				cardProps={{ cardVisible, setCardVisible }}
+				nav={navigation}
+				textInputProp={{ textInputVisible, setTextInputVisible }}
 			/>
 			<View style={styles.buttonContainer}>
 				{!rec ? (
@@ -201,18 +185,7 @@ const MapScreen = () => {
 				)}
 			</View>
 
-			<View style={styles.cardView}>
-				{cardVisible ? (
-					<Card containerStyle={styles.card}>
-						<Card.Title style={styles.textStyle}>
-							Connection Details:
-						</Card.Title>
-						<Card.Divider />
-
-						<NetInfoDisplay />
-					</Card>
-				) : null}
-			</View>
+			{cardVisible ? <CardInfo /> : null}
 			{textInputVisible ? (
 				<TextInputModal
 					visible={{ textInputVisible, setTextInputVisible, points, setPoints }}
@@ -222,28 +195,9 @@ const MapScreen = () => {
 			<View style={styles.chipView}>
 				<TouchableOpacity
 					style={styles.chipsItem}
-					onPress={() => changeMapType()}
-				>
-					<Text>{mapType === 'standard' ? 'Satellit' : 'Karta'}</Text>
-				</TouchableOpacity>
-				{/*{!rec ? (<TouchableOpacity style={styles.chipsItem} onPress={() => recording()}>
-					<Text>Starta inspelningen</Text>
-				</TouchableOpacity>) : (<TouchableOpacity style={styles.chipsItem} onPress={() => stop()}>
-					<Text>Stoppa</Text>
-				</TouchableOpacity>)}*/}
-				<TouchableOpacity
-					style={styles.chipsItem}
 					onPress={() => setPoints([])}
 				>
 					<Text>Radera</Text>
-				</TouchableOpacity>
-				<TouchableOpacity
-					style={styles.button}
-					onPress={() => {
-						!cardVisible ? setCardVisible(true) : setCardVisible(false)
-					}}
-				>
-					<Text style={styles.textStyle}>Details</Text>
 				</TouchableOpacity>
 			</View>
 		</View>
@@ -289,7 +243,8 @@ const styles = StyleSheet.create({
 	chipView: {
 		flexDirection: 'row',
 		position: 'absolute',
-		top: Platform.OS === 'ios' ? 60 : 50,
+		top: Platform.OS === 'ios' ? 760 : 750,
+		left: Platform.OS === 'ios' ? 10 : 0,
 		paddingHorizontal: 10,
 	},
 	buttonContainer: {
@@ -297,29 +252,5 @@ const styles = StyleSheet.create({
 		position: 'absolute',
 		bottom: 38,
 		paddingHorizontal: 10,
-	},
-	button: {
-		borderRadius: 20,
-		padding: 10,
-		elevation: 2,
-		backgroundColor: 'rgba(52, 52, 52, 0.8)',
-	},
-	textStyle: {
-		color: 'white',
-		fontWeight: 'bold',
-		textAlign: 'center',
-	},
-	cardView: {
-		flexDirection: 'row',
-		position: 'absolute',
-		top: Platform.OS === 'ios' ? 110 : 100,
-		paddingHorizontal: 10,
-	},
-	card: {
-		backgroundColor: 'rgba(52, 52, 52, 0.8)',
-		padding: 20,
-		marginVertical: 10,
-		borderRadius: 10,
-		justifyContent: 'center',
 	},
 })
