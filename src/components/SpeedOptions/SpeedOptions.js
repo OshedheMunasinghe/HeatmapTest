@@ -1,16 +1,25 @@
 import React, { useState } from 'react'
+import { render } from 'react-dom'
 import { StyleSheet } from 'react-native'
 import { SpeedDial } from 'react-native-elements'
+import TextInputModal from '../TextInputModal/TextInputModal'
 
 const SpeedOptions = (props) => {
 	const [open, setOpen] = useState(false)
 
-	const changeMapType = (props) => {
-		if (props.mapTypeProps.mapType === 'standard') {
-			props.mapTypeProps.setMapType('satellite')
-		} else if (props.mapTypeProps.mapType === 'satellite') {
-			props.mapTypeProps.setMapType('standard')
+	const changeMapType = () => {
+		if (props.speedOptionProps.mapType === 'standard') {
+			props.speedOptionProps.setMapType('satellite')
+		} else if (props.speedOptionProps.mapType === 'satellite') {
+			props.speedOptionProps.setMapType('standard')
 		}
+	}
+
+	const showTextInput = () => {
+		console.log('Show text input', props.speedOptionProps.TextInputModal)
+		return props.speedOptionProps.setTextInputVisible(
+			!props.speedOptionProps.TextInputModal,
+		)
 	}
 
 	return (
@@ -24,7 +33,7 @@ const SpeedOptions = (props) => {
 			onClose={() => setOpen(!open)}
 		>
 			<SpeedDial.Action
-				titleStyle={{fontFamily: "GenosR"}}
+				titleStyle={{ fontFamily: 'GenosR' }}
 				color="#D3D3D3"
 				icon={{ name: 'map', color: 'black' }}
 				title="Dashboard"
@@ -33,7 +42,9 @@ const SpeedOptions = (props) => {
 			<SpeedDial.Action
 				color="#D3D3D3"
 				icon={{ name: 'dashboard', color: 'black' }}
-				title={props.mapTypeProps.mapType === 'standard' ? 'Satellit' : 'Karta'}
+				title={
+					props.speedOptionProps.mapType === 'standard' ? 'Satellit' : 'Karta'
+				}
 				onPress={() => changeMapType(props)}
 			/>
 			<SpeedDial.Action
@@ -41,6 +52,14 @@ const SpeedOptions = (props) => {
 				icon={{ name: 'settings', color: 'black' }}
 				title="Heatmap Colors"
 				onPress={() => alert('-- Color Picker --')}
+			/>
+			<SpeedDial.Action
+				color="#D3D3D3"
+				icon={{ name: 'send', color: 'black' }}
+				title="Send to server"
+				onPress={() => {
+					showTextInput()
+				}}
 			/>
 		</SpeedDial>
 	)
