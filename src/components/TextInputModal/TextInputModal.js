@@ -1,9 +1,25 @@
-import { View, Text, TouchableOpacity, Dimensions } from 'react-native'
-import React from 'react'
-import { Button, Overlay, Card, Input } from 'react-native-elements'
+import {
+	View,
+	Text,
+	TouchableOpacity,
+	Dimensions,
+	ToastAndroid,
+} from 'react-native'
+import React, { useState } from 'react'
+import { Button, Overlay, Input } from 'react-native-elements'
 import { StyleSheet } from 'react-native'
 
 const TextInputModal = (props) => {
+	const [textInput, setTextInput] = useState('')
+
+	const handleOnChangeText = () => {
+		console.log('Handle on change text')
+		if (textInput.length < 1) {
+			ToastAndroid.show('Not a valid address', ToastAndroid.SHORT)
+			return null
+		}
+	}
+
 	const toggleOverlay = () => {
 		props.visible.setTextInputVisible(!props.visible.textInputVisible)
 	}
@@ -16,12 +32,17 @@ const TextInputModal = (props) => {
 			>
 				{/* <Card style={styles.card}> */}
 				<Text>Post your result </Text>
-				<Input placeholder="Server address" style={styles.test} />
+				<Input
+					placeholder="Server address"
+					style={styles.test}
+					value={textInput}
+					onChangeText={(event) => setTextInput(event)}
+				/>
 				<View style={styles.Button}>
 					<Button title="Cancel" onPress={toggleOverlay} />
 					<TouchableOpacity
 						style={styles.chipsItem}
-						onPress={() => console.log('Sending..')}
+						onPress={() => handleOnChangeText()}
 					>
 						<Text>Send</Text>
 					</TouchableOpacity>
