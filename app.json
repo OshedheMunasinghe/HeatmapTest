@@ -2,6 +2,7 @@
   "expo": {
     "name": "ericsson-heatmap-app",
     "slug": "ericsson-heatmap-app",
+    "description": "Logging a heatmap on a map using GPS signals.",
     "version": "0.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
