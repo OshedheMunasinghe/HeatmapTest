@@ -11,7 +11,6 @@ import {
 } from 'react-native'
 import * as Location from 'expo-location'
 import MapView, { Heatmap } from 'react-native-maps'
-// import { Button } from "react-native-elements";
 import SpeedOptions from '../../components/SpeedOptions/SpeedOptions'
 import CardInfo from '../../components/CardInfo/CardInfo';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -89,7 +88,6 @@ const MapScreen = ({ navigation }) => {
                     weight: 1,
                 }
                 setPoints((oldArray) => [...oldArray, newValue])
-                console.log(loc.coords.latitude, loc.coords.longitude)
             },
         )
         return setPosition(client)
@@ -99,8 +97,6 @@ const MapScreen = ({ navigation }) => {
             ToastAndroid.show('Inspelningen har stoppat', ToastAndroid.SHORT)
         }
         setRec(false)
-        console.log('Stoppad inspelning')
-        console.log(points)
         await position.remove()
     }
 
@@ -151,32 +147,6 @@ const MapScreen = ({ navigation }) => {
                 ) : (
                     <StopButton onPress={() => stop()} />
                 )}
-
-                {/* {!rec ? (
-                    <Button
-                        title={'●'}
-                        buttonStyle={{
-                            backgroundColor: '#D3D3D3',
-                            borderRadius: 16,
-                            width: 62,
-                            height: 62,
-                        }}
-                        titleStyle={{ color: 'red', fontSize: 23 }}
-                        onPress={() => recording()}
-                    />
-                ) : (
-                    <Button
-                        title={'■'}
-                        buttonStyle={{
-                            backgroundColor: '#D3D3D3',
-                            borderRadius: 16,
-                            width: 62,
-                            height: 62,
-                        }}
-                        titleStyle={{ color: 'green', fontSize: 23 }}
-                        onPress={() => stop()}
-                    />
-                )} */}
             </View>
 
             {cardVisible ? (<CardInfo />) : (null)}
