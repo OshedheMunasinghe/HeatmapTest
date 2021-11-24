@@ -176,12 +176,14 @@ const MapScreen = ({ navigation }) => {
 			</View>
 
 			{cardVisible ? <CardInfo /> : null}
+			{/*TODO: Can this one be a component? */}
 			{textInputVisible ? (
 				<TextInputModal
 					visible={{ textInputVisible, setTextInputVisible }}
 					points={{ points, setPoints }}
 				/>
 			) : null}
+			{/* TODO: make it to component*/}
 			<View style={styles.icon}>
 				<Icon
 					raised
