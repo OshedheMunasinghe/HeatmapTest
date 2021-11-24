@@ -67,10 +67,9 @@ const MapScreen = ({ navigation }) => {
   // When record button is pressed to start the recording
   const recording = async () => {
     if (Platform.OS === "android") {
-      ToastAndroid.show("Inspelningen har startat", ToastAndroid.SHORT);
+      ToastAndroid.show("The recording stared", ToastAndroid.SHORT);
     }
 
-<<<<<<< HEAD
     setRec(true);
     const client = await Location.watchPositionAsync(
       {
@@ -89,36 +88,20 @@ const MapScreen = ({ navigation }) => {
     );
     return setPosition(client);
   };
-=======
-    const recording = async () => {
-        if (Platform.OS === 'android') {
-            ToastAndroid.show('The recording stared', ToastAndroid.SHORT)
-        }
->>>>>>> dev
 
   // When record button is pressed to stop the recording
   const stop = async () => {
     if (Platform.OS === "android") {
-      ToastAndroid.show("Inspelningen har stoppat", ToastAndroid.SHORT);
+      ToastAndroid.show("Recording Stopped", ToastAndroid.SHORT);
     }
     setRec(false);
     await position.remove();
   };
 
-<<<<<<< HEAD
   // Callback function when changes were made within speed dial (ie. color change)
   const onChange = () => {
     restoreFromAsyncStorage();
   };
-=======
-    const stop = async () => {
-        if (Platform.OS === 'android') {
-            ToastAndroid.show('Recording Stopped', ToastAndroid.SHORT)
-        }
-        setRec(false)
-        await position.remove()
-    }
->>>>>>> dev
 
   return (
     <View style={styles.container}>

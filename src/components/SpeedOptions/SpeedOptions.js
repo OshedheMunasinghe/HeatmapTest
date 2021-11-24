@@ -41,7 +41,6 @@ const SpeedOptions = (props) => {
     );
   };
 
-<<<<<<< HEAD
   const deleteArray = () => {
     Alert.alert(
       "Are you sure?",
@@ -112,80 +111,5 @@ const SpeedOptions = (props) => {
     </>
   );
 };
-=======
-    const deleteArray = () => {
-        Alert.alert(
-            "Are you sure?",
-            "Are you sure you want to delete this recording?",
-            [
-                {
-                    text: "cancle",
-                    style: "cancel"
-                },
-                {text: "Yes", onPress: () => props.deletePoints.setPoints([])}
-            ]
-        )
-    }
-
-    return (
-        <>
-            <View>
-                <ColorPicker
-                    visible={colorPickerVisible}
-                    setVisible={setColorPickerVisible}
-                    onSave={props.onChange}
-                />
-            </View>
-            <SpeedDial
-                color="#D3D3D3"
-                style={styles.speedContainer}
-                isOpen={open}
-                icon={{name: 'edit', color: 'black'}}
-                openIcon={{name: 'close', color: 'black'}}
-                onOpen={() => setOpen(!open)}
-                onClose={() => setOpen(!open)}
-            >
-                <SpeedDial.Action
-                    titleStyle={{fontFamily: 'GenosR'}}
-                    color="#D3D3D3"
-                    icon={{name: 'map', color: 'black'}}
-                    title="Dashboard"
-                    onPress={() => showCard(props)}
-                />
-                <SpeedDial.Action
-                    color="#D3D3D3"
-                    icon={{name: 'dashboard', color: 'black'}}
-                    title={
-                        props.mapTypeProps.mapType === 'standard' ? 'satellite' : 'karta'
-                    }
-                    onPress={() => changeMapType(props)}
-                />
-                <SpeedDial.Action
-                    color="#D3D3D3"
-                    icon={{name: 'settings', color: 'black'}}
-                    title="Heatmap Colors"
-                    onPress={() => setColorPickerVisible(true)}
-                />
-                <SpeedDial.Action
-                    color="#D3D3D3"
-                    icon={{name: 'send', color: 'black'}}
-                    title="Send to server"
-                    onPress={() => {
-                        showTextInput()
-                    }}
-                />
-                <SpeedDial.Action
-                    color="#D3D3D3"
-                    icon={{name: 'delete', color: 'black'}}
-                    title="Delete"
-                    onPress={() => {
-                        deleteArray()
-                    }}
-                />
-            </SpeedDial>
-        </>
-    )
-}
->>>>>>> dev
 
 export default SpeedOptions;
