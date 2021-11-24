@@ -1,7 +1,7 @@
-import React, {useState} from 'react'
-import {View} from 'react-native'
+import React, { useState } from 'react'
+import { Alert, View } from 'react-native'
 
-import {SpeedDial} from 'react-native-elements'
+import { SpeedDial } from 'react-native-elements'
 import ColorPicker from '../ColorPicker/ColorPicker'
 import styles from './SpeedOptions.styles'
 
@@ -43,21 +43,21 @@ const SpeedOptions = (props) => {
                 color="#D3D3D3"
                 style={styles.speedContainer}
                 isOpen={open}
-                icon={{name: 'edit', color: 'black'}}
-                openIcon={{name: 'close', color: 'black'}}
+                icon={{ name: 'edit', color: 'black' }}
+                openIcon={{ name: 'close', color: 'black' }}
                 onOpen={() => setOpen(!open)}
                 onClose={() => setOpen(!open)}
             >
                 <SpeedDial.Action
-                    titleStyle={{fontFamily: 'GenosR'}}
+                    titleStyle={{ fontFamily: 'GenosR' }}
                     color="#D3D3D3"
-                    icon={{name: 'map', color: 'black'}}
+                    icon={{ name: 'map', color: 'black' }}
                     title="Dashboard"
                     onPress={() => showCard(props)}
                 />
                 <SpeedDial.Action
                     color="#D3D3D3"
-                    icon={{name: 'dashboard', color: 'black'}}
+                    icon={{ name: 'dashboard', color: 'black' }}
                     title={
                         props.mapTypeProps.mapType === 'standard' ? 'Satellit' : 'Karta'
                     }
@@ -65,16 +65,24 @@ const SpeedOptions = (props) => {
                 />
                 <SpeedDial.Action
                     color="#D3D3D3"
-                    icon={{name: 'settings', color: 'black'}}
+                    icon={{ name: 'settings', color: 'black' }}
                     title="Heatmap Colors"
                     onPress={() => setColorPickerVisible(true)}
                 />
                 <SpeedDial.Action
                     color="#D3D3D3"
-                    icon={{name: 'send', color: 'black'}}
+                    icon={{ name: 'send', color: 'black' }}
                     title="Send to server"
                     onPress={() => {
                         showTextInput()
+                    }}
+                />
+                <SpeedDial.Action
+                    color="#D3D3D3"
+                    icon={{ name: 'delete', color: 'black' }}
+                    title="Delete"
+                    onPress={() => {
+                        props.deletePoints.setPoints([])
                     }}
                 />
             </SpeedDial>
