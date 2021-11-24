@@ -98,12 +98,40 @@ const ColorPicker = ({ visible, setVisible, onSave }) => {
     return list;
   };
 
+<<<<<<< HEAD
   const saveColors = () => {
     saveHeatmapColors();
     setSaveButtonDisabled(false);
     setVisible(false);
     onSave && onSave();
   };
+=======
+    const generatePaletteButtons = () => {
+        const list = [];
+        const buttons = 5;
+        for (let i = 0; i < buttons; i++) {
+            list.push(
+                <View key={i}>
+                    <Button
+                        buttonStyle={{
+                            width: 60,
+                            height: 60,
+                            backgroundColor: buttonColors[i],
+                            borderColor: i === pickedButton ? 'cyan' : '#FFF',
+                            borderWidth: 3,
+                            borderRadius: 8,
+                            marginLeft: 1
+                        }}
+                        onPress={() => {
+                            setPickedButton(i);
+                        }}
+                    />
+                </View>
+            );
+        }
+        return list;
+    };
+>>>>>>> dev
 
   const onCancel = () => {
     loadHeatmapColors();
@@ -117,6 +145,7 @@ const ColorPicker = ({ visible, setVisible, onSave }) => {
     setButtonColors(defaultColors);
   };
 
+<<<<<<< HEAD
   return (
     <Overlay visible={visible} overlayStyle={{ width: "90%" }}>
       <Card
@@ -133,6 +162,27 @@ const ColorPicker = ({ visible, setVisible, onSave }) => {
             {generateHueButtons()}
           </View>
         </View>
+=======
+                <View style={{flexDirection: "row", justifyContent: "space-evenly"}}>
+                    {/* todo: if user has pressed the palette first it must return Toast to choose the button first */}
+                    {buttonColors && generatePaletteButtons()}
+                </View>
+                <View
+                    style={{flexDirection: "row", justifyContent: "center", top: 18}}
+                >
+                    <Button
+                        title={"save"}
+                        buttonStyle={{margin: 8, padding: 16}}
+                        disabled={saveButtonDisabled}
+                        onPress={saveColors}
+                    />
+                    <Button
+                        title={"cancle"}
+                        buttonStyle={{margin: 8, padding: 16}}
+                        onPress={() => setVisible(false)}
+                    />
+                </View>
+>>>>>>> dev
 
         <View style={{ flexDirection: "row", justifyContent: "space-evenly" }}>
           {/* todo: if user has pressed the palette first it must return Toast to choose the button first */}
