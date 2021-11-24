@@ -30,6 +30,20 @@ const SpeedOptions = (props) => {
         )
     }
 
+    const deleteArray = () => {
+        Alert.alert(
+            "Are you sure?",
+            "Are you sure you want to delete this recording?",
+            [
+                {
+                    text: "Cancel",
+                    style: "cancel"
+                },
+                { text: "Yes", onPress: () => props.deletePoints.setPoints([]) }
+            ]
+        )
+    }
+
     return (
         <>
             <View>
@@ -82,7 +96,7 @@ const SpeedOptions = (props) => {
                     icon={{ name: 'delete', color: 'black' }}
                     title="Delete"
                     onPress={() => {
-                        props.deletePoints.setPoints([])
+                        deleteArray()
                     }}
                 />
             </SpeedDial>
