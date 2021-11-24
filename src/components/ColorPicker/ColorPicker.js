@@ -6,13 +6,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const ColorPicker = ({visible, setVisible, onSave}) => {
     const [saveButtonDisabled, setSaveButtonDisabled] = useState(true);
     const [pickedButton, setPickedButton] = useState(-1);
-    const [buttonColors, setButtonColors] = useState([  // Default colors
-        "#0E0",
-        "#0D0",
-        "yellow",
-        "orange",
-        "red",
-    ]);
+    const [buttonColors, setButtonColors] = useState([
+        "#006400",
+        "#90EE90",
+        "#FFFF00",
+        "#FFA500",
+        "#FF0000",
+    ]);// Default colors
 
     useEffect(() => {
         return () => {
@@ -122,6 +122,7 @@ const ColorPicker = ({visible, setVisible, onSave}) => {
                 </View>
 
                 <View style={{flexDirection: "row", justifyContent: "space-evenly"}}>
+                    {/* todo: if user has pressed the palette first it must return Toast to choose the button first */}
                     {buttonColors && generatePaletteButtons()}
                 </View>
                 <View
