@@ -77,7 +77,7 @@ const MapScreen = ({navigation}) => {
 
     const recording = async () => {
         if (Platform.OS === 'android') {
-            ToastAndroid.show('Inspelningen har startat', ToastAndroid.SHORT)
+            ToastAndroid.show('The recording stared', ToastAndroid.SHORT)
         }
 
         setRec(true)
@@ -101,7 +101,7 @@ const MapScreen = ({navigation}) => {
 
     const stop = async () => {
         if (Platform.OS === 'android') {
-            ToastAndroid.show('Inspelningen har stoppat', ToastAndroid.SHORT)
+            ToastAndroid.show('Recording Stopped', ToastAndroid.SHORT)
         }
         setRec(false)
         await position.remove()
