@@ -12,8 +12,9 @@ import {
 import * as Location from 'expo-location'
 import MapView, { Heatmap } from 'react-native-maps'
 import SpeedOptions from '../../components/SpeedOptions/SpeedOptions'
-import CardInfo from '../../components/CardInfo/CardInfo';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import CardInfo from '../../components/CardInfo/CardInfo'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import TextInputModal from '../../components/TextInputModal/TextInputModal'
 import RecordButton from '../../components/Buttons/RecordButton/RecordButton';
 import StopButton from '../../components/Buttons/StopButton/StopButton';
 
@@ -22,22 +23,34 @@ const MapScreen = ({ navigation }) => {
     const [mapType, setMapType] = useState('standard')
     const [location, setLocation] = useState({ latitude: null, longitude: null })
     const [isLoading, setIsLoading] = useState(true)
-    const [points, setPoints] = useState([{ latitude: 1, longitude: 1, weight: 1 }])
+    const [points, setPoints] = useState([
+        { latitude: 1, longitude: 1, weight: 1 },
+    ])
     const [rec, setRec] = useState(false)
     const [position, setPosition] = useState()
     const [cardVisible, setCardVisible] = useState(true)
-    const [heatmapGradient, setHeatmapGradient] = useState(['lightgreen', 'lightgreen', 'yellow', 'orange', 'red'])
+    const [textInputVisible, setTextInputVisible] = useState(false)
+    const [heatmapGradient, setHeatmapGradient] = useState([
+        'lightgreen',
+        'lightgreen',
+        'yellow',
+        'orange',
+        'red',
+    ])
 
     useEffect(() => {
-        (async () => {
+        ; (async () => {
             setIsLoading(true)
-            restoreFromAsyncStorage()   // Restore saved Heatmap gradient
+            restoreFromAsyncStorage() // Restore saved Heatmap gradient
             let { status } = await Location.requestForegroundPermissionsAsync()
             if (status !== 'granted') {
                 return
             }
             let location = await Location.getCurrentPositionAsync({})
-            setLocation({ latitude: location.coords.latitude, longitude: location.coords.longitude })
+            setLocation({
+                latitude: location.coords.latitude,
+                longitude: location.coords.longitude,
+            })
             console.log(location)
             setIsLoading(false)
         })()
@@ -52,8 +65,7 @@ const MapScreen = ({ navigation }) => {
                 setHeatmapGradient(loadedColors)
                 console.log('Restored from Async Storage')
             }
-        }
-        catch (e) {
+        } catch (e) {
             console.log('Error restoring data from async storage')
         }
     }
@@ -61,10 +73,12 @@ const MapScreen = ({ navigation }) => {
     const saveToAsyncStorage = async () => {
         try {
             /* Heatmap gradient colors */
-            await AsyncStorage.setItem('@heatmap_colors', JSON.stringify(heatmapGradient))
+            await AsyncStorage.setItem(
+                '@heatmap_colors',
+                JSON.stringify(heatmapGradient),
+            )
             console.log('Saved to Async Storage')
-        }
-        catch (e) {
+        } catch (e) {
             console.log('Error saving data to async storage')
         }
     }
@@ -73,8 +87,8 @@ const MapScreen = ({ navigation }) => {
         if (Platform.OS === 'android') {
             ToastAndroid.show('Inspelningen har startat', ToastAndroid.SHORT)
         }
-        setRec(true)
 
+        setRec(true)
         const client = await Location.watchPositionAsync(
             {
                 accuracy: Location.Accuracy.Highest,
@@ -92,6 +106,7 @@ const MapScreen = ({ navigation }) => {
         )
         return setPosition(client)
     }
+
     const stop = async () => {
         if (Platform.OS === 'android') {
             ToastAndroid.show('Inspelningen har stoppat', ToastAndroid.SHORT)
@@ -137,10 +152,15 @@ const MapScreen = ({ navigation }) => {
                 </MapView>
             )}
             <SpeedOptions
-                mapTypeProps={{ mapType, setMapType }}
+                mapTypeProps={{
+                    mapType,
+                    setMapType,
+                }}
                 cardProps={{ cardVisible, setCardVisible }}
                 nav={navigation}
+                textInputProp={{ textInputVisible, setTextInputVisible }}
             />
+
             <View style={styles.buttonContainer}>
                 {!rec ? (
                     <RecordButton onPress={() => recording()} />
@@ -149,14 +169,22 @@ const MapScreen = ({ navigation }) => {
                 )}
             </View>
 
-            {cardVisible ? (<CardInfo />) : (null)}
+            {cardVisible ? <CardInfo /> : null}
+            {textInputVisible ? (
+                <TextInputModal
+                    visible={{ textInputVisible, setTextInputVisible }}
+                    points={{ points, setPoints }}
+                />
+            ) : null}
 
             <View style={styles.chipView}>
-                <TouchableOpacity style={styles.chipsItem} onPress={() => setPoints([])}>
+                <TouchableOpacity
+                    style={styles.chipsItem}
+                    onPress={() => setPoints([])}
+                >
                     <Text>Radera</Text>
                 </TouchableOpacity>
             </View>
-
         </View>
     )
 }
@@ -210,5 +238,4 @@ const styles = StyleSheet.create({
         bottom: 38,
         paddingHorizontal: 10,
     },
-
 })
