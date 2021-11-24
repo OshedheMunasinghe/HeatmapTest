@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {StyleSheet, View} from "react-native";
+import {View} from "react-native";
 import {Button, Card, Overlay} from "react-native-elements";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -147,5 +147,3 @@ const ColorPicker = ({visible, setVisible, onSave}) => {
 };
 
 export default ColorPicker;
-
-const styles = StyleSheet.create({});
