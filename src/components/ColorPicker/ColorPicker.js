@@ -5,7 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const ColorPicker = ({visible, setVisible, onSave}) => {
     const [saveButtonDisabled, setSaveButtonDisabled] = useState(true);
-    const [pickedButton, setPickedButton] = useState(-1);
+    const [pickedButton, setPickedButton] = useState(0);
     const [buttonColors, setButtonColors] = useState([
         "#006400",
         "#90EE90",
@@ -86,6 +86,10 @@ const ColorPicker = ({visible, setVisible, onSave}) => {
                             width: 60,
                             height: 60,
                             backgroundColor: buttonColors[i],
+                            borderColor:  i === pickedButton ? 'cyan' : '#FFF',
+                            borderWidth: 3,
+                            borderRadius: 8,
+                            marginLeft: 1
                         }}
                         onPress={() => {
                             setPickedButton(i);
