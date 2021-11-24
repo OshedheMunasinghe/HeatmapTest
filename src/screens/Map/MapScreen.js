@@ -1,16 +1,7 @@
-import React, { useEffect, useState } from 'react'
-import {
-    ActivityIndicator,
-    Dimensions,
-    Platform,
-    StyleSheet,
-    Text,
-    ToastAndroid,
-    TouchableOpacity,
-    View,
-} from 'react-native'
+import React, {useEffect, useState} from 'react'
+import {ActivityIndicator, Dimensions, Platform, StyleSheet, ToastAndroid, View,} from 'react-native'
 import * as Location from 'expo-location'
-import MapView, { Heatmap } from 'react-native-maps'
+import MapView, {Heatmap} from 'react-native-maps'
 import SpeedOptions from '../../components/SpeedOptions/SpeedOptions'
 import CardInfo from '../../components/CardInfo/CardInfo'
 import AsyncStorage from '@react-native-async-storage/async-storage'
@@ -19,12 +10,12 @@ import RecordButton from '../../components/Buttons/RecordButton/RecordButton';
 import StopButton from '../../components/Buttons/StopButton/StopButton';
 
 const mapStyle = require('../../styles/MapStyle/MapStyle.json')
-const MapScreen = ({ navigation }) => {
+const MapScreen = ({navigation}) => {
     const [mapType, setMapType] = useState('standard')
-    const [location, setLocation] = useState({ latitude: null, longitude: null })
+    const [location, setLocation] = useState({latitude: null, longitude: null})
     const [isLoading, setIsLoading] = useState(true)
     const [points, setPoints] = useState([
-        { latitude: 1, longitude: 1, weight: 1 },
+        {latitude: 1, longitude: 1, weight: 1},
     ])
     const [rec, setRec] = useState(false)
     const [position, setPosition] = useState()
@@ -39,10 +30,10 @@ const MapScreen = ({ navigation }) => {
     ])
 
     useEffect(() => {
-        ; (async () => {
+        ;(async () => {
             setIsLoading(true)
             restoreFromAsyncStorage() // Restore saved Heatmap gradient
-            let { status } = await Location.requestForegroundPermissionsAsync()
+            let {status} = await Location.requestForegroundPermissionsAsync()
             if (status !== 'granted') {
                 return
             }
@@ -123,7 +114,7 @@ const MapScreen = ({ navigation }) => {
     return (
         <View style={styles.container}>
             {isLoading ? (
-                <ActivityIndicator style={styles.map} size="large" />
+                <ActivityIndicator style={styles.map} size="large"/>
             ) : (
                 <MapView
                     style={styles.map}
@@ -157,27 +148,27 @@ const MapScreen = ({ navigation }) => {
                 </MapView>
             )}
             <SpeedOptions
-                mapTypeProps={{ mapType, setMapType }}
-                cardProps={{ cardVisible, setCardVisible }}
+                mapTypeProps={{mapType, setMapType}}
+                cardProps={{cardVisible, setCardVisible}}
                 onChange={onChange}
                 nav={navigation}
-                textInputProp={{ textInputVisible, setTextInputVisible }}
-                deletePoints={{ setPoints }}
+                textInputProp={{textInputVisible, setTextInputVisible}}
+                deletePoints={{setPoints}}
             />
 
             <View style={styles.buttonContainer}>
                 {!rec ? (
-                    <RecordButton onPress={() => recording()} />
+                    <RecordButton onPress={() => recording()}/>
                 ) : (
-                    <StopButton onPress={() => stop()} />
+                    <StopButton onPress={() => stop()}/>
                 )}
             </View>
 
-            {cardVisible ? <CardInfo /> : null}
+            {cardVisible ? <CardInfo/> : null}
             {textInputVisible ? (
                 <TextInputModal
-                    visible={{ textInputVisible, setTextInputVisible }}
-                    points={{ points, setPoints }}
+                    visible={{textInputVisible, setTextInputVisible}}
+                    points={{points, setPoints}}
                 />
             ) : null}
         </View>
