@@ -1,14 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {
-    ActivityIndicator,
-    Dimensions,
-    Platform,
-    StyleSheet,
-    Text,
-    ToastAndroid,
-    TouchableOpacity,
-    View,
-} from 'react-native'
+import {ActivityIndicator, Dimensions, Platform, StyleSheet, ToastAndroid, View,} from 'react-native'
 import * as Location from 'expo-location'
 import MapView, {Heatmap} from 'react-native-maps'
 import SpeedOptions from '../../components/SpeedOptions/SpeedOptions'
@@ -162,6 +153,7 @@ const MapScreen = ({navigation}) => {
                 onChange={onChange}
                 nav={navigation}
                 textInputProp={{textInputVisible, setTextInputVisible}}
+                deletePoints={{setPoints}}
             />
 
             <View style={styles.buttonContainer}>
@@ -179,15 +171,6 @@ const MapScreen = ({navigation}) => {
                     points={{points, setPoints}}
                 />
             ) : null}
-
-            <View style={styles.chipView}>
-                <TouchableOpacity
-                    style={styles.chipsItem}
-                    onPress={() => setPoints([])}
-                >
-                    <Text>Radera</Text>
-                </TouchableOpacity>
-            </View>
         </View>
     )
 }
@@ -213,27 +196,6 @@ const styles = StyleSheet.create({
         flex: 1,
         width: Dimensions.get('window').width,
         height: Dimensions.get('window').height,
-    },
-    chipsItem: {
-        flexDirection: 'row',
-        backgroundColor: '#fff',
-        borderRadius: 20,
-        padding: 8,
-        paddingHorizontal: 20,
-        marginHorizontal: 10,
-        height: 35,
-        shadowColor: '#ccc',
-        shadowOffset: {width: 0, height: 3},
-        shadowOpacity: 0.5,
-        shadowRadius: 5,
-        elevation: 10,
-    },
-    chipView: {
-        flexDirection: 'row',
-        position: 'absolute',
-        top: Platform.OS === 'ios' ? 760 : 750,
-        left: Platform.OS === 'ios' ? 10 : 0,
-        paddingHorizontal: 10,
     },
     buttonContainer: {
         flexDirection: 'row',

@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {View} from 'react-native'
+import {Alert, View} from 'react-native'
 
 import {SpeedDial} from 'react-native-elements'
 import ColorPicker from '../ColorPicker/ColorPicker'
@@ -27,6 +27,20 @@ const SpeedOptions = (props) => {
     const showTextInput = () => {
         return props.textInputProp.setTextInputVisible(
             !props.textInputProp.textInputVisible,
+        )
+    }
+
+    const deleteArray = () => {
+        Alert.alert(
+            "Are you sure?",
+            "Are you sure you want to delete this recording?",
+            [
+                {
+                    text: "Cancel",
+                    style: "cancel"
+                },
+                {text: "Yes", onPress: () => props.deletePoints.setPoints([])}
+            ]
         )
     }
 
@@ -75,6 +89,14 @@ const SpeedOptions = (props) => {
                     title="Send to server"
                     onPress={() => {
                         showTextInput()
+                    }}
+                />
+                <SpeedDial.Action
+                    color="#D3D3D3"
+                    icon={{name: 'delete', color: 'black'}}
+                    title="Delete"
+                    onPress={() => {
+                        deleteArray()
                     }}
                 />
             </SpeedDial>
