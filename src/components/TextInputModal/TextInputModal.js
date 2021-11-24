@@ -45,10 +45,7 @@ const TextInputModal = (props) => {
 
 	return (
 		<View style={styles.cardView}>
-			<Overlay
-				isVisible={props.visible.textInputVisible}
-				onBackdropPress={toggleOverlay}
-			>
+			<Overlay isVisible={props.visible.textInputVisible}>
 				<Text>Post your result </Text>
 				<Input
 					placeholder="Server address"
