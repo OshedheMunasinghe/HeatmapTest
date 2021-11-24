@@ -6,8 +6,9 @@ import SpeedOptions from '../../components/SpeedOptions/SpeedOptions'
 import CardInfo from '../../components/CardInfo/CardInfo'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import TextInputModal from '../../components/TextInputModal/TextInputModal'
-import RecordButton from '../../components/Buttons/RecordButton/RecordButton';
-import StopButton from '../../components/Buttons/StopButton/StopButton';
+import RecordButton from '../../components/Buttons/RecordButton/RecordButton'
+import StopButton from '../../components/Buttons/StopButton/StopButton'
+import {Icon} from 'react-native-elements'
 
 const mapStyle = require('../../styles/MapStyle/MapStyle.json')
 const MapScreen = ({navigation}) => {
@@ -119,7 +120,7 @@ const MapScreen = ({navigation}) => {
                 <MapView
                     style={styles.map}
                     showsUserLocation={true}
-                    showsMyLocationButton={true}
+                    showsMyLocationButton={false}
                     provider="google"
                     initialRegion={{
                         latitude: location.latitude,
@@ -129,6 +130,9 @@ const MapScreen = ({navigation}) => {
                     }}
                     mapType={mapType}
                     customMapStyle={mapStyle}
+                    ref={(mapView) => {
+                        this.mapView = mapView
+                    }}
                 >
                     <Heatmap
                         initialRegion={{
@@ -165,12 +169,30 @@ const MapScreen = ({navigation}) => {
             </View>
 
             {cardVisible ? <CardInfo/> : null}
+            {/*TODO: Can this one be a component? */}
             {textInputVisible ? (
                 <TextInputModal
                     visible={{textInputVisible, setTextInputVisible}}
                     points={{points, setPoints}}
                 />
             ) : null}
+            {/* TODO: make it to component*/}
+            <View style={styles.icon}>
+                <Icon
+                    raised
+                    name="my-location"
+                    type="material"
+                    color="black"
+                    onPress={() => {
+                        this.mapView.animateCamera({
+                            center: {
+                                latitude: location.latitude,
+                                longitude: location.longitude,
+                            },
+                        })
+                    }}
+                />
+            </View>
         </View>
     )
 }
@@ -201,6 +223,13 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         position: 'absolute',
         bottom: 38,
+        paddingHorizontal: 10,
+    },
+    icon: {
+        flexDirection: 'row',
+        position: 'absolute',
+        top: Platform.OS === 'ios' ? 760 : 750,
+        left: Platform.OS === 'ios' ? 10 : 0,
         paddingHorizontal: 10,
     },
 })
