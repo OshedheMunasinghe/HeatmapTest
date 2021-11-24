@@ -14,6 +14,8 @@ const icons = {
   delete: { name: "delete", color: "black" },
 };
 
+const speedActionColor = "#D3D3D3";
+
 const SpeedOptions = (props) => {
   const [open, setOpen] = useState(false);
   const [colorPickerVisible, setColorPickerVisible] = useState(false);
@@ -64,7 +66,7 @@ const SpeedOptions = (props) => {
       </View>
 
       <SpeedDial
-        color={styles.speedAction}
+        color={speedActionColor}
         style={styles.speedContainer}
         isOpen={open}
         icon={icons.edit}
@@ -74,13 +76,13 @@ const SpeedOptions = (props) => {
       >
         <SpeedDial.Action
           titleStyle={{ fontFamily: "GenosR" }}
-          color={styles.speedAction}
+          color={speedActionColor}
           icon={icons.map}
           title="Dashboard"
           onPress={() => showCard(props)}
         />
         <SpeedDial.Action
-          color={styles.speedAction}
+          color={speedActionColor}
           icon={icons.dashboard}
           title={
             props.mapTypeProps.mapType === "standard" ? "Satellit" : "Karta"
@@ -88,19 +90,19 @@ const SpeedOptions = (props) => {
           onPress={() => changeMapType(props)}
         />
         <SpeedDial.Action
-          color={styles.speedAction}
+          color="#D3D3D3"
           icon={icons.settings}
           title="Heatmap Colors"
           onPress={() => setColorPickerVisible(true)}
         />
         <SpeedDial.Action
-          color={styles.speedAction}
+          color={speedActionColor}
           icon={icons.send}
           title="Send to server"
           onPress={showTextInput}
         />
         <SpeedDial.Action
-          color={styles.speedAction}
+          color={speedActionColor}
           icon={icons.delete}
           title="Delete"
           onPress={deleteArray}

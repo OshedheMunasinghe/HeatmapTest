@@ -17,7 +17,4 @@ export default StyleSheet.create({
   speedContainer: {
     marginBottom: 23,
   },
-  speedAction: {
-    color: "#D3D3D3",
-  },
 });
