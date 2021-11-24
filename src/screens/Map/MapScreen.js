@@ -138,7 +138,7 @@ const MapScreen = ({ navigation }) => {
 					mapType={mapType}
 					customMapStyle={mapStyle}
 					ref={(mapView) => {
-						_mapView = mapView
+						this.mapView = mapView
 					}}
 				>
 					<Heatmap
@@ -189,7 +189,7 @@ const MapScreen = ({ navigation }) => {
 					type="material"
 					color="black"
 					onPress={() => {
-						_mapView.animateCamera({
+						this.mapView.animateCamera({
 							center: {
 								latitude: location.latitude,
 								longitude: location.longitude,
