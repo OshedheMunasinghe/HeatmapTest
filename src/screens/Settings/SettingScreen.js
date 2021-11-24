@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {Text} from "react-native-elements";
-import {ScrollView, SafeAreaView, View,} from "react-native";
+import {SafeAreaView, ScrollView, View,} from "react-native";
 import SettingsColorPicker from "../../components/ColorPicker/SettingsColorPicker";
 
 // const [itemClicked, setItemClicked] = useState(-1)
