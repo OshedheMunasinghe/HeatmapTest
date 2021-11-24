@@ -36,7 +36,7 @@ const SpeedOptions = (props) => {
             "Are you sure you want to delete this recording?",
             [
                 {
-                    text: "Cancel",
+                    text: "cancle",
                     style: "cancel"
                 },
                 {text: "Yes", onPress: () => props.deletePoints.setPoints([])}
@@ -73,7 +73,7 @@ const SpeedOptions = (props) => {
                     color="#D3D3D3"
                     icon={{name: 'dashboard', color: 'black'}}
                     title={
-                        props.mapTypeProps.mapType === 'standard' ? 'Satellit' : 'Karta'
+                        props.mapTypeProps.mapType === 'standard' ? 'satellite' : 'karta'
                     }
                     onPress={() => changeMapType(props)}
                 />

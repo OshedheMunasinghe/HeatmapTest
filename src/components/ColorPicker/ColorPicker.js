@@ -86,7 +86,7 @@ const ColorPicker = ({visible, setVisible, onSave}) => {
                             width: 60,
                             height: 60,
                             backgroundColor: buttonColors[i],
-                            borderColor:  i === pickedButton ? 'cyan' : '#FFF',
+                            borderColor: i === pickedButton ? 'cyan' : '#FFF',
                             borderWidth: 3,
                             borderRadius: 8,
                             marginLeft: 1
@@ -133,13 +133,13 @@ const ColorPicker = ({visible, setVisible, onSave}) => {
                     style={{flexDirection: "row", justifyContent: "center", top: 18}}
                 >
                     <Button
-                        title={"SPARA"}
+                        title={"save"}
                         buttonStyle={{margin: 8, padding: 16}}
                         disabled={saveButtonDisabled}
                         onPress={saveColors}
                     />
                     <Button
-                        title={"AVBRYT"}
+                        title={"cancle"}
                         buttonStyle={{margin: 8, padding: 16}}
                         onPress={() => setVisible(false)}
                     />
