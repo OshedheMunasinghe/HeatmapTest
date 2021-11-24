@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import {
     ActivityIndicator,
+    Alert,
     Dimensions,
     Platform,
     StyleSheet,
@@ -102,6 +103,11 @@ const MapScreen = ({ navigation }) => {
         await position.remove()
     }
 
+    // Callback function when changes were made within speed dial (ie. color change)
+    const onChange = () => {
+        restoreFromAsyncStorage()
+    }
+
     return (
         <View style={styles.container}>
             {isLoading ? (
@@ -141,6 +147,7 @@ const MapScreen = ({ navigation }) => {
             <SpeedOptions
                 mapTypeProps={{ mapType, setMapType }}
                 cardProps={{ cardVisible, setCardVisible }}
+                onChange={onChange}
                 nav={navigation}
             />
             <View style={styles.buttonContainer}>

@@ -29,6 +29,7 @@ const SpeedOptions = (props) => {
         <ColorPicker
           visible={colorPickerVisible}
           setVisible={setColorPickerVisible}
+          onSave={props.onChange}
         />
       </View>
       <SpeedDial

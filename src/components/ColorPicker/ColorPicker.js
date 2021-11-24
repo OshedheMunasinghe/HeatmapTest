@@ -3,7 +3,7 @@ import { StyleSheet, View } from "react-native";
 import { Button, Card, Overlay } from "react-native-elements";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const ColorPicker = ({ visible, setVisible }) => {
+const ColorPicker = ({ visible, setVisible, onSave }) => {
   const [saveButtonDisabled, setSaveButtonDisabled] = useState(true);
   const [pickedButton, setPickedButton] = useState(-1);
   const [buttonColors, setButtonColors] = useState([  // Default colors
@@ -103,6 +103,7 @@ const generateHueButtons = () => {
     saveHeatmapColors();
     setSaveButtonDisabled(false);
     setVisible(false);
+    onSave && onSave()
   };
 
   return (
