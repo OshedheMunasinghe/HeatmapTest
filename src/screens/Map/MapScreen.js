@@ -115,6 +115,11 @@ const MapScreen = ({navigation}) => {
         await position.remove()
     }
 
+    // Callback function when changes were made within speed dial (ie. color change)
+    const onChange = () => {
+        restoreFromAsyncStorage()
+    }
+
     return (
         <View style={styles.container}>
             {isLoading ? (
@@ -152,11 +157,9 @@ const MapScreen = ({navigation}) => {
                 </MapView>
             )}
             <SpeedOptions
-                mapTypeProps={{
-                    mapType,
-                    setMapType,
-                }}
+                mapTypeProps={{mapType, setMapType}}
                 cardProps={{cardVisible, setCardVisible}}
+                onChange={onChange}
                 nav={navigation}
                 textInputProp={{textInputVisible, setTextInputVisible}}
             />

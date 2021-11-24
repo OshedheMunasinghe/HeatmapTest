@@ -9,8 +9,7 @@
     "splash": {
       "image": "./assets/e2.png",
       "resizeMode": "contain",
-      "backgroundColor": "#343C50",
-      "resizeMode": "contain"
+      "backgroundColor": "#343C50"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -25,7 +24,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#343C50"
-      }
+      },
+      "package": "test.app.heatmap"
     },
     "web": {
       "favicon": "./assets/icon.png"
