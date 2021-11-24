@@ -6,7 +6,12 @@ import ColorPicker from "../ColorPicker/ColorPicker";
 import styles from "./SpeedOptions.styles";
 
 const icons = {
-  close: { name: "edit", color: "black" },
+  edit: { name: "edit", color: "black" },
+  map: { name: "map", color: "black" },
+  dashboard: { name: "dashboard", color: "black" },
+  settings: { name: "settings", color: "black" },
+  send: { name: "send", color: "black" },
+  delete: { name: "delete", color: "black" },
 };
 
 const SpeedOptions = (props) => {
@@ -62,7 +67,7 @@ const SpeedOptions = (props) => {
         color="#D3D3D3"
         style={styles.speedContainer}
         isOpen={open}
-        icon={icons.close}
+        icon={icons.edit}
         openIcon={{ name: "close", color: "black" }}
         onOpen={() => setOpen(!open)}
         onClose={() => setOpen(!open)}
@@ -70,13 +75,13 @@ const SpeedOptions = (props) => {
         <SpeedDial.Action
           titleStyle={{ fontFamily: "GenosR" }}
           color="#D3D3D3"
-          icon={{ name: "map", color: "black" }}
+          icon={icons.map}
           title="Dashboard"
           onPress={() => showCard(props)}
         />
         <SpeedDial.Action
           color="#D3D3D3"
-          icon={{ name: "dashboard", color: "black" }}
+          icon={icons.dashboard}
           title={
             props.mapTypeProps.mapType === "standard" ? "Satellit" : "Karta"
           }
@@ -84,19 +89,19 @@ const SpeedOptions = (props) => {
         />
         <SpeedDial.Action
           color="#D3D3D3"
-          icon={{ name: "settings", color: "black" }}
+          icon={icons.settings}
           title="Heatmap Colors"
           onPress={() => setColorPickerVisible(true)}
         />
         <SpeedDial.Action
           color="#D3D3D3"
-          icon={{ name: "send", color: "black" }}
+          icon={icons.send}
           title="Send to server"
           onPress={showTextInput}
         />
         <SpeedDial.Action
           color="#D3D3D3"
-          icon={{ name: "delete", color: "black" }}
+          icon={icons.delete}
           title="Delete"
           onPress={deleteArray}
         />
