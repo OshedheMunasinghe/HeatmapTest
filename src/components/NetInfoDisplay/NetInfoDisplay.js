@@ -1,115 +1,115 @@
-import React, { useEffect, useState } from 'react'
-import { Text, View } from 'react-native'
+import React, {useEffect, useState} from 'react'
+import {Text, View} from 'react-native'
 import NetInfo from '@react-native-community/netinfo'
 import styles from './NetInfoDisplay.styles'
 
 const NetInfoDisplay = () => {
-	NetInfo.configure({
-		reachabilityUrl: 'https://clients3.google.com/generate_204',
-		reachabilityTest: async (response) => response.status === 204,
-		reachabilityLongTimeout: 60 * 1000, // 60s
-		reachabilityShortTimeout: 1 * 1000, // 5s
-		reachabilityRequestTimeout: 15 * 1000, // 15s
-		reachabilityShouldRun: () => true,
-	})
+    NetInfo.configure({
+        reachabilityUrl: 'https://clients3.google.com/generate_204',
+        reachabilityTest: async (response) => response.status === 204,
+        reachabilityLongTimeout: 60 * 1000, // 60s
+        reachabilityShortTimeout: 1 * 1000, // 5s
+        reachabilityRequestTimeout: 15 * 1000, // 15s
+        reachabilityShouldRun: () => true,
+    })
 
-	const [state, setState] = useState({
-		connectionStatus: false,
-		connectionType: null,
-		connectionReachable: false,
-		connectionWifiEnabled: false,
-		connectionDetails: null,
-	})
+    const [state, setState] = useState({
+        connectionStatus: false,
+        connectionType: null,
+        connectionReachable: false,
+        connectionWifiEnabled: false,
+        connectionDetails: null,
+    })
 
-	const [intervalTime, setIntervalTime] = useState(4000)
-	const [randomNumber, setRandomNumber] = useState(randomSignalStrength())
+    const [intervalTime, setIntervalTime] = useState(4000)
+    const [randomNumber, setRandomNumber] = useState(randomSignalStrength())
 
-	function randomSignalStrength() {
-		return Math.floor(Math.random() * (99 - 65) + 65)
-	}
+    function randomSignalStrength() {
+        return Math.floor(Math.random() * (99 - 65) + 65)
+    }
 
-	function unsubscribe() {
-		NetInfo.fetch()
-			.then((response) => {
-				setState({
-					connectionStatus: response.isConnected,
-					connectionType: response.type,
-					connectionReachable: response.isInternetReachable,
-					connectionWifiEnabled: response.isWifiEnabled,
-					connectionDetails: response.details,
-				})
-			})
-			.catch((error) => {
-				console.log(error)
-			})
-	}
+    function unsubscribe() {
+        NetInfo.fetch()
+            .then((response) => {
+                setState({
+                    connectionStatus: response.isConnected,
+                    connectionType: response.type,
+                    connectionReachable: response.isInternetReachable,
+                    connectionWifiEnabled: response.isWifiEnabled,
+                    connectionDetails: response.details,
+                })
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
 
-	useEffect(() => {
-		unsubscribe()
-		const interval = setInterval(() => {
-			unsubscribe()
-			setRandomNumber(randomSignalStrength())
-			console.log('Fetch NetInfo every' + intervalTime + 'miliseconds')
-		}, intervalTime)
-		return () => clearInterval(interval)
-	}, [])
+    useEffect(() => {
+        unsubscribe()
+        const interval = setInterval(() => {
+            unsubscribe()
+            setRandomNumber(randomSignalStrength())
+            console.log('Fetch NetInfo every' + intervalTime + 'miliseconds')
+        }, intervalTime)
+        return () => clearInterval(interval)
+    }, [])
 
-	return (
-		<View style={styles.container}>
-			<Text style={styles.textStyle}>
-				Connection Status :{' '}
-				{state.connectionStatus ? 'Connected' : 'Disconnected'}
-			</Text>
-			<Text style={styles.textStyle}>
-				Connection Type : {state.connectionType}
-			</Text>
-			<Text style={styles.textStyle}>
-				Internet Reachable : {state.connectionReachable ? 'YES' : 'NO'}
-			</Text>
-			<Text style={styles.textStyle}>
-				Wifi Enabled : {state.connectionWifiEnabled ? 'YES' : 'NO'}
-			</Text>
-			<Text style={styles.textStyle}>
-				{'\n'}Connection Details : {'\n'}
-				{state.connectionType == 'wifi'
-					? (state.connectionDetails.isConnectionExpensive
-							? 'Connection Expensive: YES'
-							: 'Connection Expensive: NO') +
-					  '\n' +
-					  'SSID: ' +
-					  state.connectionDetails.ssid +
-					  '\n' +
-					  'BSSID: ' +
-					  state.connectionDetails.bssid +
-					  '\n' +
-					  'Strength: ' +
-					  state.connectionDetails.strength +
-					  '\n' +
-					  'Ip Address: ' +
-					  state.connectionDetails.ipAddress +
-					  '\n' +
-					  'Subnet: ' +
-					  state.connectionDetails.subnet +
-					  '\n' +
-					  'Frequency: ' +
-					  state.connectionDetails.frequency
-					: state.connectionType == 'cellular'
-					? (state.connectionDetails.isConnectionExpensive
-							? 'Connection Expensive: YES'
-							: 'Connection Expensive: NO') +
-					  '\n' +
-					  'cellularGeneration: ' +
-					  state.connectionDetails.cellularGeneration +
-					  '\n' +
-					  'Signal Strength: ' +
-					  randomNumber +
-					  '\n' +
-					  'carrier: ' +
-					  state.connectionDetails.carrier
-					: 'Check your connection'}
-			</Text>
-		</View>
-	)
+    return (
+        <View style={styles.container}>
+            <Text style={styles.textStyle}>
+                Connection Status :{' '}
+                {state.connectionStatus ? 'Connected' : 'Disconnected'}
+            </Text>
+            <Text style={styles.textStyle}>
+                Connection Type : {state.connectionType}
+            </Text>
+            <Text style={styles.textStyle}>
+                Internet Reachable : {state.connectionReachable ? 'YES' : 'NO'}
+            </Text>
+            <Text style={styles.textStyle}>
+                Wifi Enabled : {state.connectionWifiEnabled ? 'YES' : 'NO'}
+            </Text>
+            <Text style={styles.textStyle}>
+                {'\n'}Connection Details : {'\n'}
+                {state.connectionType == 'wifi'
+                    ? (state.connectionDetails.isConnectionExpensive
+                        ? 'Connection Expensive: YES'
+                        : 'Connection Expensive: NO') +
+                    '\n' +
+                    'SSID: ' +
+                    state.connectionDetails.ssid +
+                    '\n' +
+                    'BSSID: ' +
+                    state.connectionDetails.bssid +
+                    '\n' +
+                    'Strength: ' +
+                    state.connectionDetails.strength +
+                    '\n' +
+                    'Ip Address: ' +
+                    state.connectionDetails.ipAddress +
+                    '\n' +
+                    'Subnet: ' +
+                    state.connectionDetails.subnet +
+                    '\n' +
+                    'Frequency: ' +
+                    state.connectionDetails.frequency
+                    : state.connectionType == 'cellular'
+                        ? (state.connectionDetails.isConnectionExpensive
+                            ? 'Connection Expensive: YES'
+                            : 'Connection Expensive: NO') +
+                        '\n' +
+                        'cellularGeneration: ' +
+                        state.connectionDetails.cellularGeneration +
+                        '\n' +
+                        'Signal Strength: ' +
+                        randomNumber +
+                        '\n' +
+                        'carrier: ' +
+                        state.connectionDetails.carrier
+                        : 'Check your connection'}
+            </Text>
+        </View>
+    )
 }
 
 export default NetInfoDisplay

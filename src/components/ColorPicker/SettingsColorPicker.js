@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View} from "react-native";
 import {Button, Card, Overlay} from 'react-native-elements';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -32,22 +32,20 @@ const SettingsColorPicker = ({props}) => {
                     console.log('Loaded colors from Async Storage')
                 }
                 //setButtonColors(['lightgreen', 'lightgreen', 'yellow', 'orange', 'red']
-                
-            }
-            catch (e) {
-                console.log ('Error restoring data from async storage')
+
+            } catch (e) {
+                console.log('Error restoring data from async storage')
             }
         }
-    
+
         const saveHeatmapColors = async () => {
             try {
                 await AsyncStorage.setItem('@heatmap_colors', JSON.stringify(buttonColors))
-            }
-            catch (e) {
-                console.log ('Error saving data to async storage')
+            } catch (e) {
+                console.log('Error saving data to async storage')
             }
         }
-    
+
         const generateHueButtons = () => {
             const list = []
             const buttons = 48
