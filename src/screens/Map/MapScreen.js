@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {
     ActivityIndicator,
-    Alert,
     Dimensions,
     Platform,
     StyleSheet,
@@ -158,8 +157,8 @@ const MapScreen = ({navigation}) => {
                 </MapView>
             )}
             <SpeedOptions
-                mapTypeProps={{ mapType, setMapType }}
-                cardProps={{ cardVisible, setCardVisible }}
+                mapTypeProps={{mapType, setMapType}}
+                cardProps={{cardVisible, setCardVisible}}
                 onChange={onChange}
                 nav={navigation}
                 textInputProp={{textInputVisible, setTextInputVisible}}

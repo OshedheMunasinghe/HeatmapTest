@@ -3,16 +3,16 @@ import {StyleSheet, View} from "react-native";
 import {Button, Card, Overlay} from "react-native-elements";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const ColorPicker = ({ visible, setVisible, onSave }) => {
-  const [saveButtonDisabled, setSaveButtonDisabled] = useState(true);
-  const [pickedButton, setPickedButton] = useState(-1);
-  const [buttonColors, setButtonColors] = useState([  // Default colors
-    "#0E0",
-    "#0D0",
-    "yellow",
-    "orange",
-    "red",
-  ]);
+const ColorPicker = ({visible, setVisible, onSave}) => {
+    const [saveButtonDisabled, setSaveButtonDisabled] = useState(true);
+    const [pickedButton, setPickedButton] = useState(-1);
+    const [buttonColors, setButtonColors] = useState([  // Default colors
+        "#0E0",
+        "#0D0",
+        "yellow",
+        "orange",
+        "red",
+    ]);
 
     useEffect(() => {
         return () => {
@@ -97,12 +97,12 @@ const ColorPicker = ({ visible, setVisible, onSave }) => {
         return list;
     };
 
-  const saveColors = () => {
-    saveHeatmapColors();
-    setSaveButtonDisabled(false);
-    setVisible(false);
-    onSave && onSave()
-  };
+    const saveColors = () => {
+        saveHeatmapColors();
+        setSaveButtonDisabled(false);
+        setVisible(false);
+        onSave && onSave()
+    };
 
     return (
         <Overlay visible={visible} overlayStyle={{width: "90%"}}>
