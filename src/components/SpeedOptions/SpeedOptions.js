@@ -35,7 +35,7 @@ const alertStyle = "cancel"
 const mapStandardStyle = "standard"
 const mapStatelliteStyle = "satellite"
 
-const {textContainer, smallIconButtonContainer} = SpeedOptionsStyles
+const {textContainer, smallIconButtonContainer, speedDialContainer} = SpeedOptionsStyles
 
 const SpeedOptions = (props) => {
     const [open, setOpen] = useState(false);
@@ -87,7 +87,7 @@ const SpeedOptions = (props) => {
             </View>
 
             <SpeedDial
-                containerStyle={{marginBottom: 24, marginRight: 25}}
+                containerStyle={speedDialContainer}
                 color={speedDialColor}
                 isOpen={open}
                 icon={icons.edit}

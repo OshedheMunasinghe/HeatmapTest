@@ -16,7 +16,18 @@ const send = t('send')
 const sendAddress = t('server_address')
 const headerPost = t('headerPostTitle')
 
-const {cardView, button, inputStyle} = TextInputModalStyles
+const {
+    cardView,
+    buttonContainer,
+    inputStyle,
+    textCancelStyle,
+    textSendStyle,
+    buttons,
+    headerPostStyle,
+    buttonLineRight,
+    overlayStyle
+} = TextInputModalStyles
+
 
 const TextInputModal = (props) => {
     const [textInput, setTextInput] = useState('')
@@ -56,21 +67,22 @@ const TextInputModal = (props) => {
     }
 
     return (
-        <View style={cardView}>
-            <Overlay isVisible={props.visible.textInputVisible}>
-                <Text>{headerPost} </Text>
-                <Input
-                    placeholder={sendAddress}
-                    style={inputStyle}
-                    value={textInput}
-                    onChangeText={(event) => setTextInput(event)}
-                />
-                <View style={button}>
-                    <Button title={cancel} onPress={() => toggleOverlay()}/>
-                    <Button title={send} onPress={() => handleOnChangeText()}/>
-                </View>
-            </Overlay>
-        </View>
+        <Overlay isVisible={props.visible.textInputVisible} style={cardView}
+                 overlayStyle={overlayStyle}>
+            <Text style={headerPostStyle}>{headerPost}</Text>
+            <Input
+                placeholder={sendAddress}
+                style={inputStyle}
+                value={textInput}
+                onChangeText={(event) => setTextInput(event)}
+            />
+            <View style={buttonContainer}>
+                <Button buttonStyle={[buttons, buttonLineRight]} titleStyle={textCancelStyle} title={cancel}
+                        onPress={() => toggleOverlay()}/>
+                <Button buttonStyle={buttons} titleStyle={textSendStyle} title={send}
+                        onPress={() => handleOnChangeText()}/>
+            </View>
+        </Overlay>
     )
 }
 

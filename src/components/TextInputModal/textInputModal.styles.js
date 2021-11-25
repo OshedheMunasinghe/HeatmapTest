@@ -8,7 +8,7 @@ export const TextInputModalStyles = StyleSheet.create({
         top: Platform.OS === 'ios' ? 110 : 100,
         paddingHorizontal: 10,
     },
-    button: {
+    buttonContainer: {
         flex: 0,
         flexDirection: 'row',
         justifyContent: 'space-around',
@@ -18,5 +18,36 @@ export const TextInputModalStyles = StyleSheet.create({
         flex: 0,
         width: Dimensions.get('window').width - 100,
         height: Dimensions.get('window').height - 900,
+        fontFamily: 'GenosR',
+        top: 4,
+        color: "white",
+        marginTop: 18,
+        fontSize: 24,
     },
+    textCancelStyle: {
+        fontFamily: 'GenosL',
+        fontSize: 25,
+        opacity: 0.8
+    },
+    textSendStyle: {
+        fontFamily: 'GenosB',
+        fontSize: 25
+    },
+    buttons: {
+        width: 152,
+        backgroundColor: "#343C50",
+    },
+    headerPostStyle: {
+        fontFamily: 'GenosL',
+        color: "white",
+        left: 8,
+        top: 8
+    },
+    buttonLineRight: {
+        borderRightWidth: 1,
+        borderColor: "white"
+    },
+    overlayStyle: {
+        backgroundColor: "#343C50"
+    }
 })

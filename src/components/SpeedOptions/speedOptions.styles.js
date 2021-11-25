@@ -1,12 +1,6 @@
 import {StyleSheet} from "react-native";
 
 export const SpeedOptionsStyles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
-
-    },
     textContainer: {
         fontFamily: "GenosR",
         backgroundColor: "#171C28",
@@ -17,6 +11,10 @@ export const SpeedOptionsStyles = StyleSheet.create({
 
     smallIconButtonContainer: {
         right: 25
+    },
+    speedDialContainer: {
+        marginBottom: 24,
+        marginRight: 25
     }
 
 });
