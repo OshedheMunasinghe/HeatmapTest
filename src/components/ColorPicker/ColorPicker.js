@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {View} from "react-native";
-import {Button, Card, Overlay} from "react-native-elements";
+import {Button, Overlay, Text} from "react-native-elements";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {ColorPickerStyles} from "./colorPicker.styles";
 import {t} from "../../language/language";
@@ -9,10 +9,22 @@ const defaultColors = ["#006400", "#90EE90", "#FFFF00", "#FFA500", "#FF0000"];
 
 const save = t('save_title')
 const cancel = t('cancel')
+const chooseColorText = t('choose_color_text')
 const defaultTitle = t('default_title')
 
 const atHeatMapColors = "@heatmap_colors"
-const {paletteButton, hueButton} = ColorPickerStyles
+const {
+    boderLineStyle,
+    paletteButton,
+    hueButton,
+    textStyle,
+    overlayContainer,
+    colorPickerContainer,
+    hueButtonsContainer,
+    buttonsContainer,
+    buttonStyle,
+    buttonFlexContainer
+} = ColorPickerStyles
 
 const ColorPicker = ({visible, setVisible, onSave}) => {
     const [saveButtonDisabled, setSaveButtonDisabled] = useState(true);
@@ -124,46 +136,40 @@ const ColorPicker = ({visible, setVisible, onSave}) => {
     };
 
     return (
-        <Overlay visible={visible} overlayStyle={{width: "90%"}}>
-            <Card
-                containerStyle={{
-                    minHeight: "40%",
-                    borderRadius: 8,
-                    marginBottom: 20,
-                }}
-            >
-                <Card.Title>CHOOSE COLOR</Card.Title>
-                {/* * color picker*/}
-                <View style={{top: 28, minHeight: 64}}>
-                    <View style={{minHeight: "8%", bottom: 32, flexDirection: "row"}}>
-                        {generateHueButtons()}
-                    </View>
-                </View>
+        <Overlay visible={visible} overlayStyle={overlayContainer}>
+            <Text style={textStyle}>{chooseColorText}</Text>
+            <View style={boderLineStyle}/>
 
-                <View style={{flexDirection: "row", justifyContent: "space-evenly"}}>
-                    {buttonColors && generatePaletteButtons()}
+            {/* * color picker*/}
+            <View style={colorPickerContainer}>
+                <View style={hueButtonsContainer}>
+                    {generateHueButtons()}
                 </View>
-                <View
-                    style={{flexDirection: "row", justifyContent: "center", top: 18}}
-                >
-                    <Button
-                        title={save}
-                        buttonStyle={{margin: 8, padding: 16}}
-                        disabled={saveButtonDisabled}
-                        onPress={saveColors}
-                    />
-                    <Button
-                        title={cancel}
-                        buttonStyle={{margin: 8, padding: 16}}
-                        onPress={onCancel}
-                    />
-                    <Button
-                        title={defaultTitle}
-                        buttonStyle={{margin: 8, padding: 16}}
-                        onPress={onDefault}
-                    />
-                </View>
-            </Card>
+            </View>
+
+            <View style={buttonFlexContainer}>
+                {buttonColors && generatePaletteButtons()}
+            </View>
+            <View
+                style={buttonsContainer}
+            >
+                <Button
+                    title={save}
+                    buttonStyle={buttonStyle}
+                    disabled={saveButtonDisabled}
+                    onPress={saveColors}
+                />
+                <Button
+                    title={cancel}
+                    buttonStyle={buttonStyle}
+                    onPress={onCancel}
+                />
+                <Button
+                    title={defaultTitle}
+                    buttonStyle={buttonStyle}
+                    onPress={onDefault}
+                />
+            </View>
         </Overlay>
     );
 };

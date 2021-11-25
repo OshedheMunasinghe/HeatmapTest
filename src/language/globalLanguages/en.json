@@ -40,5 +40,6 @@
   "toast_success": "Success!",
   "toast_error": "Something went wrong!",
   "toast_stopped": "Recording Stopped",
-  "toast_record": "The recording stared"
+  "toast_record": "The recording stared",
+  "choose_color_text": "CHOOSE COLOR"
 }
