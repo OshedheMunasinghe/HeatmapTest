@@ -2,6 +2,29 @@ import React, {useEffect, useState} from 'react'
 import {Text, View} from 'react-native'
 import NetInfo from '@react-native-community/netinfo'
 import styles from './NetInfoDisplay.styles'
+import {t} from "../../language/language";
+
+const connectionStatus = t('connection_status')
+const connectionType = t('connection_type')
+const connectionReachable = t('connection_reachable')
+const freq = t('frequency')
+const connected = t('connected')
+const disconnected = t('disconnected')
+const yes = t('yes')
+const no = t('no')
+const wifi_enable = t('wifi_enable')
+const connectionDetail = t('connection_detail')
+const connectionExpYes = t('connection_expensive_yes')
+const connectionExpNo = t('connection_expensive_no')
+const SSID = t('ssid')
+const BSSID = t('bssid')
+const strength = t('strength')
+const ipAdress = t('ip_adress')
+const subnet = t('subnet')
+const cellularGeneration = t('cellularGeneration')
+const signalStrength = t('signal_strength')
+const carrier = t('carrier')
+const checkYourConnection = t('check_you_connection')
 
 const NetInfoDisplay = () => {
     NetInfo.configure({
@@ -49,7 +72,6 @@ const NetInfoDisplay = () => {
         const interval = setInterval(() => {
             unsubscribe()
             setRandomNumber(randomSignalStrength())
-            console.log('Fetch NetInfo every' + intervalTime + 'miliseconds')
         }, intervalTime)
         return () => clearInterval(interval)
     }, [])
@@ -57,56 +79,56 @@ const NetInfoDisplay = () => {
     return (
         <View style={styles.container}>
             <Text style={styles.textStyle}>
-                Connection Status :{' '}
-                {state.connectionStatus ? 'Connected' : 'Disconnected'}
+                {connectionStatus} :{' '}
+                {state.connectionStatus ? connected : disconnected}
             </Text>
             <Text style={styles.textStyle}>
-                Connection Type : {state.connectionType}
+                {connectionType} : {state.connectionType}
             </Text>
             <Text style={styles.textStyle}>
-                Internet Reachable : {state.connectionReachable ? 'YES' : 'NO'}
+                {connectionReachable} : {state.connectionReachable ? yes : no}
             </Text>
             <Text style={styles.textStyle}>
-                Wifi Enabled : {state.connectionWifiEnabled ? 'YES' : 'NO'}
+                {wifi_enable}: {state.connectionWifiEnabled ? yes : no}
             </Text>
             <Text style={styles.textStyle}>
-                {'\n'}Connection Details : {'\n'}
+                {'\n'}{connectionDetail} : {'\n'}
                 {state.connectionType == 'wifi'
                     ? (state.connectionDetails.isConnectionExpensive
-                        ? 'Connection Expensive: YES'
-                        : 'Connection Expensive: NO') +
+                        ? connectionExpYes
+                        : connectionExpNo) +
                     '\n' +
-                    'SSID: ' +
+                    SSID +
                     state.connectionDetails.ssid +
                     '\n' +
-                    'BSSID: ' +
+                    BSSID +
                     state.connectionDetails.bssid +
                     '\n' +
-                    'Strength: ' +
+                    strength +
                     state.connectionDetails.strength +
                     '\n' +
-                    'Ip Address: ' +
+                    ipAdress +
                     state.connectionDetails.ipAddress +
                     '\n' +
-                    'Subnet: ' +
+                    subnet +
                     state.connectionDetails.subnet +
                     '\n' +
-                    'Frequency: ' +
+                    freq +
                     state.connectionDetails.frequency
                     : state.connectionType == 'cellular'
                         ? (state.connectionDetails.isConnectionExpensive
-                            ? 'Connection Expensive: YES'
-                            : 'Connection Expensive: NO') +
+                            ? connectionExpYes
+                            : connectionExpNo) +
                         '\n' +
-                        'cellularGeneration: ' +
+                        cellularGeneration +
                         state.connectionDetails.cellularGeneration +
                         '\n' +
-                        'Signal Strength: ' +
+                        signalStrength +
                         randomNumber +
                         '\n' +
-                        'carrier: ' +
+                        carrier +
                         state.connectionDetails.carrier
-                        : 'Check your connection'}
+                        : checkYourConnection}
             </Text>
         </View>
     )

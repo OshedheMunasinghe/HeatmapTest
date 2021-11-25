@@ -1,9 +1,6 @@
 import * as React from 'react';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {useFonts} from 'expo-font';
 import MapScreen from "./src/screens/Map/MapScreen";
-
-const Stack = createNativeStackNavigator();
 
 export default function App() {
     const [loaded] = useFonts({
