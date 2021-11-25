@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {Text, View} from 'react-native'
 import NetInfo from '@react-native-community/netinfo'
-import styles from './NetInfoDisplay.styles'
+import styles from './netInfoDisplay.styles'
 import {t} from "../../language/language";
 
 const connectionStatus = t('connection_status')

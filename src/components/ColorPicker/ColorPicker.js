@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {View} from "react-native";
 import {Button, Card, Overlay} from "react-native-elements";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import styles from "./ColorPicker.styles";
+import styles from "./colorPicker.styles";
 import {t} from "../../language/language";
 
 const defaultColors = ["#006400", "#90EE90", "#FFFF00", "#FFA500", "#FF0000"];

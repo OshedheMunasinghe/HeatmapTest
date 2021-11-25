@@ -1,7 +1,7 @@
 import {Text, ToastAndroid, View} from 'react-native'
 import React, {useState} from 'react'
 import {Button, Input, Overlay} from 'react-native-elements'
-import styles from './TextInputModal.styles'
+import styles from './textInputModal.styles'
 import axios from 'axios'
 import {t} from "../../language/language";
 

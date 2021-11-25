@@ -1,6 +1,6 @@
 import React from 'react'
 import {Button} from "react-native-elements";
-import styles from './RecordButton.styles'
+import styles from './recordButton.styles'
 
 const RecordButton = (props) => {
     return (

@@ -1,4 +1,4 @@
-import {StyleSheet, Dimensions} from 'react-native'
+import {Dimensions, StyleSheet} from 'react-native'
 
 export default StyleSheet.create({
     container: {
@@ -6,24 +6,24 @@ export default StyleSheet.create({
         backgroundColor: "#fff",
         alignItems: "center",
         justifyContent: "center",
-      },
-      speedContainer: {
+    },
+    speedContainer: {
         flex: 1,
         backgroundColor: "#fff",
         alignItems: "flex-start",
         justifyContent: "center",
         marginBottom: 50,
         padding: 30,
-      },
-      map: {
+    },
+    map: {
         flex: 1,
         width: Dimensions.get("window").width,
         height: Dimensions.get("window").height,
-      },
-      buttonContainer: {
+    },
+    buttonContainer: {
         flexDirection: "row",
         position: "absolute",
         bottom: 38,
         paddingHorizontal: 10,
-      }
+    }
 })

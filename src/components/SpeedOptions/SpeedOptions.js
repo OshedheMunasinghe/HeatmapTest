@@ -3,7 +3,7 @@ import {Alert, View} from "react-native";
 
 import {SpeedDial} from "react-native-elements";
 import ColorPicker from "../ColorPicker/ColorPicker";
-import styles from "./SpeedOptions.styles";
+import styles from "./speedOptions.styles";
 import {t} from "../../language/language";
 
 const iconColor = "white"

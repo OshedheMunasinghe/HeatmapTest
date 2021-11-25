@@ -1,6 +1,6 @@
 import React from 'react'
 import {Button} from "react-native-elements";
-import styles from './StopButton.styles'
+import styles from './stopButton.styles'
 
 const StopButton = (props) => {
     return (

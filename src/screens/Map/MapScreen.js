@@ -9,7 +9,7 @@ import TextInputModal from "../../components/TextInputModal/TextInputModal";
 import RecordButton from "../../components/Buttons/RecordButton/RecordButton";
 import StopButton from "../../components/Buttons/StopButton/StopButton";
 import LocationButton from "../../components/Buttons/Location/LocationButton";
-import styles from "./MapScreen.styles";
+import styles from "./mapScreen.styles";
 import {t} from "../../language/language";
 
 const mapStyle = require("../../styles/MapStyle/MapStyle.json");
