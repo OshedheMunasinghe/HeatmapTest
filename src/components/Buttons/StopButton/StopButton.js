@@ -1,9 +1,9 @@
 import React from 'react'
 import {Button} from "react-native-elements";
 import {StopButtonStyles} from './stopButton.styles'
-import {ButtonStyle} from "../button.styles";
+import {ButtonStyles} from "../button.styles";
 
-const {buttonShadow} = ButtonStyle
+const {buttonShadow} = ButtonStyles
 const {button, title} = StopButtonStyles
 
 const StopButton = (props) => {

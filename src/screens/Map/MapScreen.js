@@ -9,10 +9,12 @@ import TextInputModal from "../../components/TextInputModal/TextInputModal";
 import RecordButton from "../../components/Buttons/RecordButton/RecordButton";
 import StopButton from "../../components/Buttons/StopButton/StopButton";
 import LocationButton from "../../components/Buttons/Location/LocationButton";
-import styles from "./mapScreen.styles";
+import {MapScreenStyles} from "./mapScreen.styles";
 import {t} from "../../language/language";
 
 const mapStyle = require("../../styles/MapStyle/MapStyle.json");
+
+const {buttonContainer, container, map} = MapScreenStyles
 
 const atHeatmapColor = "@heatmap_colors"
 const standard = "standard"
@@ -113,12 +115,12 @@ const MapScreen = ({navigation}) => {
     };
 
     return (
-        <View style={styles.container}>
+        <View style={container}>
             {isLoading ? (
-                <ActivityIndicator style={styles.map} size="large"/>
+                <ActivityIndicator style={map} size="large"/>
             ) : (
                 <MapView
-                    style={styles.map}
+                    style={map}
                     showsUserLocation={true}
                     showsMyLocationButton={false}
                     provider={googleProvider}
@@ -160,7 +162,7 @@ const MapScreen = ({navigation}) => {
                 deletePoints={{setPoints}}
             />
 
-            <View style={styles.buttonContainer}>
+            <View style={buttonContainer}>
                 {!rec ? (
                     <RecordButton onPress={() => recording()}/>
                 ) : (

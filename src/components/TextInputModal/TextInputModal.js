@@ -1,7 +1,7 @@
 import {Text, ToastAndroid, View} from 'react-native'
 import React, {useState} from 'react'
 import {Button, Input, Overlay} from 'react-native-elements'
-import styles from './textInputModal.styles'
+import {TextInputModalStyles} from './textInputModal.styles'
 import axios from 'axios'
 import {t} from "../../language/language";
 
@@ -15,6 +15,8 @@ const cancel = t('cancel')
 const send = t('send')
 const sendAddress = t('server_address')
 const headerPost = t('headerPostTitle')
+
+const {cardView, button, inputStyle} = TextInputModalStyles
 
 const TextInputModal = (props) => {
     const [textInput, setTextInput] = useState('')
@@ -54,16 +56,16 @@ const TextInputModal = (props) => {
     }
 
     return (
-        <View style={styles.cardView}>
+        <View style={cardView}>
             <Overlay isVisible={props.visible.textInputVisible}>
                 <Text>{headerPost} </Text>
                 <Input
                     placeholder={sendAddress}
-                    style={styles.inputStyle}
+                    style={inputStyle}
                     value={textInput}
                     onChangeText={(event) => setTextInput(event)}
                 />
-                <View style={styles.button}>
+                <View style={button}>
                     <Button title={cancel} onPress={() => toggleOverlay()}/>
                     <Button title={send} onPress={() => handleOnChangeText()}/>
                 </View>

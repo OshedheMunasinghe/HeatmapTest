@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {View} from "react-native";
 import {Button, Card, Overlay} from "react-native-elements";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import styles from "./colorPicker.styles";
+import {ColorPickerStyles} from "./colorPicker.styles";
 import {t} from "../../language/language";
 
 const defaultColors = ["#006400", "#90EE90", "#FFFF00", "#FFA500", "#FF0000"];
@@ -12,6 +12,7 @@ const cancel = t('cancel')
 const defaultTitle = t('default_title')
 
 const atHeatMapColors = "@heatmap_colors"
+const {paletteButton, hueButton} = ColorPickerStyles
 
 const ColorPicker = ({visible, setVisible, onSave}) => {
     const [saveButtonDisabled, setSaveButtonDisabled] = useState(true);
@@ -64,7 +65,7 @@ const ColorPicker = ({visible, setVisible, onSave}) => {
                             }
                         }}
                         buttonStyle={[
-                            styles.hueButton,
+                            hueButton,
                             {
                                 padding: 0,
                                 height: 32,
@@ -87,7 +88,7 @@ const ColorPicker = ({visible, setVisible, onSave}) => {
                 <View key={i}>
                     <Button
                         buttonStyle={[
-                            styles.paletteButton,
+                            paletteButton,
                             {
                                 backgroundColor: buttonColors[i],
                                 borderColor: i === pickedButton ? "cyan" : "#FFF",

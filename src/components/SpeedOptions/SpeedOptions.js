@@ -3,7 +3,7 @@ import {Alert, View} from "react-native";
 
 import {SpeedDial} from "react-native-elements";
 import ColorPicker from "../ColorPicker/ColorPicker";
-import styles from "./speedOptions.styles";
+import {SpeedOptionsStyles} from "./speedOptions.styles";
 import {t} from "../../language/language";
 
 const iconColor = "white"
@@ -34,6 +34,8 @@ const deleteTitle = t('delete')
 const alertStyle = "cancel"
 const mapStandardStyle = "standard"
 const mapStatelliteStyle = "satellite"
+
+const {speedContainer} = SpeedOptionsStyles
 
 const SpeedOptions = (props) => {
     const [open, setOpen] = useState(false);
@@ -86,7 +88,7 @@ const SpeedOptions = (props) => {
 
             <SpeedDial
                 color={speedDialColor}
-                style={styles.speedContainer}
+                style={speedContainer}
                 isOpen={open}
                 icon={icons.edit}
                 openIcon={icons.openDialIcon}

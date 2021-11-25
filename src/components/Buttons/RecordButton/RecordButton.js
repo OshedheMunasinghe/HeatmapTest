@@ -1,9 +1,9 @@
 import React from 'react'
 import {Button} from "react-native-elements";
-import {ButtonStyle} from "../button.styles";
+import {ButtonStyles} from "../button.styles";
 import {RecordButtonStyles} from "./recordButton.styles";
 
-const {buttonShadow} = ButtonStyle
+const {buttonShadow} = ButtonStyles
 const {title, button} = RecordButtonStyles
 
 const RecordButton = (props) => {

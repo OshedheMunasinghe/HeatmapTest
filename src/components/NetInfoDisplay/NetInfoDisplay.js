@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {Text, View} from 'react-native'
 import NetInfo from '@react-native-community/netinfo'
-import styles from './netInfoDisplay.styles'
+import {NetInfoDisplayStyles} from './netInfoDisplay.styles'
 import {t} from "../../language/language";
 
 const connectionStatus = t('connection_status')
@@ -25,6 +25,8 @@ const cellularGeneration = t('cellularGeneration')
 const signalStrength = t('signal_strength')
 const carrier = t('carrier')
 const checkYourConnection = t('check_you_connection')
+
+const {textStyle, container} = NetInfoDisplayStyles
 
 const NetInfoDisplay = () => {
     NetInfo.configure({
@@ -77,21 +79,21 @@ const NetInfoDisplay = () => {
     }, [])
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.textStyle}>
+        <View style={container}>
+            <Text style={textStyle}>
                 {connectionStatus} :{' '}
                 {state.connectionStatus ? connected : disconnected}
             </Text>
-            <Text style={styles.textStyle}>
+            <Text style={textStyle}>
                 {connectionType} : {state.connectionType}
             </Text>
-            <Text style={styles.textStyle}>
+            <Text style={textStyle}>
                 {connectionReachable} : {state.connectionReachable ? yes : no}
             </Text>
-            <Text style={styles.textStyle}>
+            <Text style={textStyle}>
                 {wifi_enable}: {state.connectionWifiEnabled ? yes : no}
             </Text>
-            <Text style={styles.textStyle}>
+            <Text style={textStyle}>
                 {'\n'}{connectionDetail} : {'\n'}
                 {state.connectionType == 'wifi'
                     ? (state.connectionDetails.isConnectionExpensive

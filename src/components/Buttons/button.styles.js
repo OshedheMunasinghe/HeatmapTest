@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native'
 
-export const ButtonStyle = StyleSheet.create({
+export const ButtonStyles = StyleSheet.create({
     buttonShadow: {
         shadowColor: "#000",
         shadowOffset: {

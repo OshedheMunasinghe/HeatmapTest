@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native'
 
-export default StyleSheet.create({
+export const CardInfoStyles = StyleSheet.create({
     textStyle: {
         color: "white",
         fontWeight: "bold",

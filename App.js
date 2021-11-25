@@ -6,6 +6,7 @@ export default function App() {
     const [loaded] = useFonts({
         GenosB: require('./assets/Fonts/Genos-Bold.ttf'),
         GenosR: require('./assets/Fonts/Genos-Regular.ttf'),
+        GenosL: require('./assets/Fonts/Genos-Light.ttf'),
     });
 
     if (!loaded) {

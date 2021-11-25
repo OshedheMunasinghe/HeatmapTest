@@ -2,9 +2,9 @@ import React from 'react'
 import {View} from 'react-native'
 import {Icon} from 'react-native-elements'
 import {LocationButtonStyles} from './locationButton.styles'
-import {ButtonStyle} from "../button.styles";
+import {ButtonStyles} from "../button.styles";
 
-const {buttonShadow} = ButtonStyle
+const {buttonShadow} = ButtonStyles
 const {icon} = LocationButtonStyles
 
 const LocationButton = (props) => {

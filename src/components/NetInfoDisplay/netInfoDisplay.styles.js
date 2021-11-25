@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native'
 
-export default StyleSheet.create({
+export const NetInfoDisplayStyles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'flex-start',

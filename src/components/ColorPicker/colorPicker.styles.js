@@ -1,6 +1,6 @@
 import {StyleSheet} from "react-native";
 
-export default StyleSheet.create({
+export const ColorPickerStyles = StyleSheet.create({
     paletteButton: {
         width: 60,
         height: 60,

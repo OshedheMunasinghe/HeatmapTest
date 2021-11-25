@@ -1,23 +1,12 @@
 import {Dimensions, StyleSheet} from 'react-native'
-
-export default StyleSheet.create({
+//TODO IOS PLATTFORM! make it seperate
+export const TextInputModalStyles = StyleSheet.create({
     cardView: {
         flex: 1,
         flexDirection: 'column',
         position: 'absolute',
         top: Platform.OS === 'ios' ? 110 : 100,
         paddingHorizontal: 10,
-    },
-    textStyle: {
-        color: 'black',
-        fontWeight: 'bold',
-        textAlign: 'center',
-    },
-    card: {
-        padding: 20,
-        marginVertical: 10,
-        borderRadius: 10,
-        justifyContent: 'center',
     },
     button: {
         flex: 0,
