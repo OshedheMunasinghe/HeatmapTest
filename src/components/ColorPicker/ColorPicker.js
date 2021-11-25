@@ -24,6 +24,12 @@ const {
     buttonsContainer,
     buttonStyle,
     buttonFlexContainer,
+    buttonCancelContainer,
+    buttonDefaultContainer,
+    buttonDisable,
+    buttonSaveContainer,
+    buttonFontSize,
+    buttonRightLine
 } = ColorPickerStyles
 
 const buttonTargetHighLight = "#36E7FF"
@@ -157,17 +163,21 @@ const ColorPicker = ({visible, setVisible, onSave}) => {
                 style={buttonsContainer}
             >
                 <Button
+                    titleStyle={[buttonSaveContainer, buttonFontSize]}
                     title={save}
-                    buttonStyle={buttonStyle}
+                    buttonStyle={[buttonStyle, buttonRightLine]}
                     disabled={saveButtonDisabled}
+                    disabledStyle={buttonDisable}
                     onPress={saveColors}
                 />
                 <Button
+                    titleStyle={[buttonCancelContainer, buttonFontSize]}
                     title={cancel}
-                    buttonStyle={buttonStyle}
+                    buttonStyle={[buttonStyle, buttonRightLine]}
                     onPress={onCancel}
                 />
                 <Button
+                    titleStyle={[buttonDefaultContainer, buttonFontSize]}
                     title={defaultTitle}
                     buttonStyle={buttonStyle}
                     onPress={onDefault}

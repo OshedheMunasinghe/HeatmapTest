@@ -51,15 +51,31 @@ export const ColorPickerStyles = StyleSheet.create({
     buttonStyle: {
         margin: 8,
         padding: 16,
-        width: 100
+        width: 100,
+        backgroundColor: '#343C50'
     },
     buttonFlexContainer: {
         flexDirection: "row",
         justifyContent: "space-evenly"
     },
-    buttonDefaultStyle: {
+    buttonDisable: {
         backgroundColor: "#545A69"
     },
-
-    buttonDisableTarget: {}
+    buttonSaveContainer: {
+        fontFamily: 'GenosB'
+    },
+    buttonCancelContainer: {
+        fontFamily: 'GenosL',
+        opacity: 0.8
+    },
+    buttonDefaultContainer: {
+        fontFamily: 'GenosR'
+    },
+    buttonFontSize: {
+        fontSize: 20,
+    },
+    buttonRightLine: {
+        borderColor: 'white',
+        borderRightWidth: 1
+    }
 });
