@@ -18,7 +18,6 @@
   "carrier": "carrier: ",
   "check_you_connection": "Check your connection",
   "subnet": "Subnet: ",
-  "save_button": "SAVE",
   "yes": "YES",
   "no": "NO",
   "are_you_sure_": "Delete Record",
@@ -29,5 +28,7 @@
   "title_map": "MAP",
   "title_heatmapColors": "HEATMAP COLORS",
   "title_sendtoserver": "SEND TO SERVER",
-  "delete": "DELETE"
+  "delete": "DELETE",
+  "save_title": "SAVE",
+  "default_title": "RESET"
 }

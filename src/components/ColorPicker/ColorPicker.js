@@ -7,6 +7,12 @@ import {t} from "../../language/language";
 
 const defaultColors = ["#006400", "#90EE90", "#FFFF00", "#FFA500", "#FF0000"];
 
+const save = t('save_title')
+const cancel = t('cancel')
+const defaultTitle = t('default_title')
+
+const atHeatMapColors = "@heatmap_colors"
+
 const ColorPicker = ({visible, setVisible, onSave}) => {
     const [saveButtonDisabled, setSaveButtonDisabled] = useState(true);
     const [pickedButton, setPickedButton] = useState(0);
@@ -19,7 +25,7 @@ const ColorPicker = ({visible, setVisible, onSave}) => {
     const loadHeatmapColors = async () => {
         try {
             let heatmapColors = buttonColors;
-            const json = await AsyncStorage.getItem("@heatmap_colors");
+            const json = await AsyncStorage.getItem(atHeatMapColors);
             if (json != null) {
                 heatmapColors = JSON.parse(json);
                 setButtonColors(heatmapColors);
@@ -32,7 +38,7 @@ const ColorPicker = ({visible, setVisible, onSave}) => {
     const saveHeatmapColors = async () => {
         try {
             await AsyncStorage.setItem(
-                "@heatmap_colors",
+                atHeatMapColors,
                 JSON.stringify(buttonColors)
             );
         } catch (e) {
@@ -140,19 +146,18 @@ const ColorPicker = ({visible, setVisible, onSave}) => {
                     style={{flexDirection: "row", justifyContent: "center", top: 18}}
                 >
                     <Button
-                        title={"save"}
-                        title={t('save_button')}
+                        title={save}
                         buttonStyle={{margin: 8, padding: 16}}
                         disabled={saveButtonDisabled}
                         onPress={saveColors}
                     />
                     <Button
-                        title={"cancel"}
+                        title={cancel}
                         buttonStyle={{margin: 8, padding: 16}}
                         onPress={onCancel}
                     />
                     <Button
-                        title={"DEFAULT"}
+                        title={defaultTitle}
                         buttonStyle={{margin: 8, padding: 16}}
                         onPress={onDefault}
                     />

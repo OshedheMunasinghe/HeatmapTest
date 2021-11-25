@@ -18,16 +18,18 @@
   "carrier": "Carrier: ",
   "check_you_connection": "Kontrollera din anslutning",
   "subnet": "Subnet: ",
-  "save_button": "SPARA",
+  "save_button_title": "SPARA",
   "yes": "JA",
   "no": "NEJ",
   "are_you_sure_": "Ta bort Inspelning",
-  "alert_text": "Är du säkert att du vill ta bort din senaste inspelning?",
+  "alert_text": "Är du säkert att du vill ta bort din senast inspelning?",
   "cancel": "AVBRYT",
   "title_dashboard": "ANSLAGSTAVLA",
   "title_satellite": "SATELLIT",
   "title_map": "KARTA",
   "title_heatmapColors": "HEATMAP FÄRG",
   "title_sendtoserver": "SKICKA TILL SERVER",
-  "delete": "TA BORT"
+  "delete": "TA BORT",
+  "save_title": "SPARA",
+  "default_title": "RESET"
 }
