@@ -5,11 +5,11 @@ import {LocationButtonStyles} from './locationButton.styles'
 import {ButtonStyles} from "../button.styles";
 
 const {buttonShadow} = ButtonStyles
-const {icon} = LocationButtonStyles
+const {container, iOSContainer} = LocationButtonStyles
 
 const LocationButton = (props) => {
     return (
-        <View style={icon}>
+        <View style={container}>
             <Icon
                 containerStyle={buttonShadow}
                 raised

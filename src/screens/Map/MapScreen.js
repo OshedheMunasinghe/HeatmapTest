@@ -177,6 +177,7 @@ const MapScreen = ({navigation}) => {
                     points={{points, setPoints}}
                 />
             ) : null}
+
             <LocationButton
                 onPress={() => {
                     this.mapView.animateCamera({
