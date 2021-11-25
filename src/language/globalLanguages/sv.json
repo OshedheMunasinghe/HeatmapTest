@@ -1,4 +1,24 @@
 {
-  "hello_world": "hej världen",
-  "bye_world": "hej dååååå :D "
+  "connection_detail": "Nätverk Information",
+  "connection_status": "Nätverk status",
+  "connection_type": "Nätverk Type",
+  "connection_reachable": "Nätverk Reachable",
+  "wifi_enable": "WIFI Ansluten",
+  "connected": "Ansluten",
+  "disconnected": "Frånkopplad",
+  "connection_expensive_yes": "Connection Expensive: JA",
+  "connection_expensive_no": "Connection Expensive: NEJ",
+  "ssid": "SSID: ",
+  "bssid": "BSSID: ",
+  "strength": "Stryka: ",
+  "frequency": "Frekvens: ",
+  "ip_adress": "IP Adress: ",
+  "cellularGeneration": "cellularGeneration",
+  "signal_strength": "Signal Stryka: ",
+  "carrier": "Carrier: ",
+  "check_you_connection": "Kontrollera din anslutning",
+  "subnet": "Subnet: ",
+  "save_button": "SPARA",
+  "yes": "JA",
+  "no": "NEJ"
 }

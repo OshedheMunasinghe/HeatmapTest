@@ -1,4 +1,24 @@
 {
-  "hello_world": "hello world",
-  "bye_world": "bye world!!!"
+  "connection_detail": "Connection Detail",
+  "connection_status": "Connection status",
+  "connection_type": "Connection Type",
+  "connection_reachable": "Connection Reachable",
+  "wifi_enable": "WIFI Enabled",
+  "connected": "Connected",
+  "disconnected": "Disconnected",
+  "connection_expensive_yes": "Connection Expensive: YES",
+  "connection_expensive_no": "Connection Expensive: NO",
+  "ssid": "SSID: ",
+  "bssid": "BSSID: ",
+  "strength": "Strength: ",
+  "frequency": "Frequency: ",
+  "ip_adress": "IP Adress: ",
+  "cellularGeneration": "cellularGeneration",
+  "signal_strength": "Signal Strength: ",
+  "carrier": "carrier: ",
+  "check_you_connection": "Check your connection",
+  "subnet": "Subnet: ",
+  "save_button": "SAVE",
+  "yes": "YES",
+  "no": "NO"
 }

@@ -12,22 +12,9 @@ I18n.translations = {
 }
 // Set the locale once at the beginning of your app.
 I18n.locale = Localization.locale;
+
 // When a value is missing from a language it'll fallback to another language with the key present.
-// om det inte går att översätta sätt den till true för då går den till engelsk läge
-I18n.fallbacks = false;
-
-// set phones language
-const getLanguage = async () => {
-    try {
-        const choice = Localization.locale
-        I18n.locale = choice.substr(0, 2)
-        I18n.initAsync()
-    } catch (error) {
-        console.log(error)
-    }
-}
-
-getLanguage()
+I18n.fallbacks = true;
 
 // export function
 export function t(name) {
