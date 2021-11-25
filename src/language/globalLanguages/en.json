@@ -33,5 +33,12 @@
   "default_title": "RESET",
   "send": "SEND",
   "server_address": "Server Address",
-  "headerPostTitle": "Write down Server Address"
+  "headerPostTitle": "Write down Server Address",
+  "toast_unvalidtext": "Not a valid address",
+  "toast_nosendtext": "Nothing to send",
+  "toast_sending": "Sending..",
+  "toast_success": "Success!",
+  "toast_error": "Something went wrong!",
+  "toast_stopped": "Recording Stopped",
+  "toast_record": "The recording stared"
 }

@@ -5,11 +5,11 @@ import styles from './TextInputModal.styles'
 import axios from 'axios'
 import {t} from "../../language/language";
 
-const toastUnValidText = 'Not a valid address'
-const toastNoSendText = 'Nothing to send'
-const toastSending = 'Sending..'
-const toastSuccess = 'Success!'
-const toastError = 'Something went wrong!'
+const toastUnValidText = t('toast_unvalidtext')
+const toastNoSendText = t('toast_nosendtext')
+const toastSending = t('toast_sending')
+const toastSuccess = t('toast_success')
+const toastError = t('toast_error')
 
 const cancel = t('cancel')
 const send = t('send')
