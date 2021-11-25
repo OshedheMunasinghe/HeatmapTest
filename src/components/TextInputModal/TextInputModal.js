@@ -1,21 +1,31 @@
-import {Text, ToastAndroid, TouchableOpacity, View} from 'react-native'
+import {Text, ToastAndroid, View} from 'react-native'
 import React, {useState} from 'react'
-import {Input, Overlay} from 'react-native-elements'
+import {Button, Input, Overlay} from 'react-native-elements'
 import styles from './TextInputModal.styles'
 import axios from 'axios'
+import {t} from "../../language/language";
+
+const toastUnValidText = 'Not a valid address'
+const toastNoSendText = 'Nothing to send'
+const toastSending = 'Sending..'
+const toastSuccess = 'Success!'
+const toastError = 'Something went wrong!'
+
+const cancel = t('cancel')
+const send = t('send')
+const sendAddress = t('server_address')
+const headerPost = t('headerPostTitle')
 
 const TextInputModal = (props) => {
     const [textInput, setTextInput] = useState('')
 
     const handleOnChangeText = () => {
-        let logs = props.points.points
-
         if (textInput.length < 1) {
-            ToastAndroid.show('Not a valid address', ToastAndroid.SHORT)
+            ToastAndroid.show(toastUnValidText, ToastAndroid.SHORT)
             return null
         }
         if (props.points.points.length < 1) {
-            ToastAndroid.show('Nothing to send', ToastAndroid.SHORT)
+            ToastAndroid.show(toastNoSendText, ToastAndroid.SHORT)
             return null
         } else {
             postLogs()
@@ -24,18 +34,18 @@ const TextInputModal = (props) => {
     }
 
     const postLogs = () => {
-        ToastAndroid.show('Sending..', ToastAndroid.SHORT)
+        ToastAndroid.show(toastSending, ToastAndroid.SHORT)
         axios
             .post(textInput, props.logs)
             .then(function (response) {
                 if (response.status === 200) {
-                    ToastAndroid.show('Success!', ToastAndroid.SHORT)
+                    ToastAndroid.show(toastSuccess, ToastAndroid.SHORT)
                     props.points.setPoints([])
                 }
             })
             .catch(function (error) {
-                console.log('Error: ', error)
-                ToastAndroid.show('Something went wrong!', 30)
+                console.warn('Error: ', error)
+                ToastAndroid.show(toastError, 30)
             })
     }
 
@@ -46,21 +56,16 @@ const TextInputModal = (props) => {
     return (
         <View style={styles.cardView}>
             <Overlay isVisible={props.visible.textInputVisible}>
-                <Text>Post your result </Text>
+                <Text>{headerPost} </Text>
                 <Input
-                    placeholder="Server address"
+                    placeholder={sendAddress}
                     style={styles.inputStyle}
                     value={textInput}
                     onChangeText={(event) => setTextInput(event)}
                 />
                 <View style={styles.button}>
-                    <TouchableOpacity onPress={() => handleOnChangeText()}>
-                        <Text>Send</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity onPress={() => toggleOverlay()}>
-                        <Text>Cancel</Text>
-                    </TouchableOpacity>
+                    <Button title={cancel} onPress={() => toggleOverlay()}/>
+                    <Button title={send} onPress={() => handleOnChangeText()}/>
                 </View>
             </Overlay>
         </View>

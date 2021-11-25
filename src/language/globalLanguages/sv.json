@@ -31,5 +31,8 @@
   "title_sendtoserver": "SKICKA TILL SERVER",
   "delete": "TA BORT",
   "save_title": "SPARA",
-  "default_title": "RESET"
+  "default_title": "RESET",
+  "send": "SKICKA",
+  "server_address": "Server Adress",
+  "headerPostTitle": "Skriv in din server adress"
 }

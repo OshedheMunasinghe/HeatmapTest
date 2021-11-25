@@ -30,5 +30,8 @@
   "title_sendtoserver": "SEND TO SERVER",
   "delete": "DELETE",
   "save_title": "SAVE",
-  "default_title": "RESET"
+  "default_title": "RESET",
+  "send": "SEND",
+  "server_address": "Server Address",
+  "headerPostTitle": "Write down Server Address"
 }
