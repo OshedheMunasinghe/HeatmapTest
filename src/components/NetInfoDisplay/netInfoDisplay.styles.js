@@ -1,14 +1,33 @@
-import {StyleSheet} from 'react-native'
+import {Platform, StyleSheet} from 'react-native'
 
 export const NetInfoDisplayStyles = StyleSheet.create({
     container: {
-        flex: 1,
-        alignItems: 'flex-start',
-        justifyContent: 'center',
-        flexDirection: 'column',
+        backgroundColor: "#070C17",
+        position: 'absolute',
+        borderRadius: 8,
+        top: 50,
+        width: 258,
+        height: 288,
+        opacity: 0.8
     },
-    textStyle: {
+    containeriOS: {
+        top: Platform.OS === 'ios' ? 60 : 50,
+    },
+    textStyleDetail: {
         color: 'white',
-        fontWeight: 'bold',
+        fontFamily: "GenosR",
+        fontSize: 18,
+        textAlign: "left",
+        top: 18,
+        paddingLeft: 28
     },
+    borderLine: {
+        backgroundColor: "white",
+        width: 220,
+        height: 2,
+        left: 22,
+        top: -8,
+        opacity: 0.8
+    }
+
 })

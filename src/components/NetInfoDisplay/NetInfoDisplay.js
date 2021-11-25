@@ -26,7 +26,7 @@ const signalStrength = t('signal_strength')
 const carrier = t('carrier')
 const checkYourConnection = t('check_you_connection')
 
-const {textStyle, container} = NetInfoDisplayStyles
+const {textStyleDetail, container, containeriOS, borderLine} = NetInfoDisplayStyles
 
 const NetInfoDisplay = () => {
     NetInfo.configure({
@@ -79,22 +79,28 @@ const NetInfoDisplay = () => {
     }, [])
 
     return (
-        <View style={container}>
-            <Text style={textStyle}>
-                {connectionStatus} :{' '}
+        <View style={
+            [container, containeriOS]
+        }>
+            <Text style={textStyleDetail}>
+                {connectionStatus}:{' '}
                 {state.connectionStatus ? connected : disconnected}
             </Text>
-            <Text style={textStyle}>
+            <Text style={textStyleDetail}>
                 {connectionType} : {state.connectionType}
             </Text>
-            <Text style={textStyle}>
+            <Text style={textStyleDetail}>
                 {connectionReachable} : {state.connectionReachable ? yes : no}
             </Text>
-            <Text style={textStyle}>
+
+            <Text style={textStyleDetail}>
                 {wifi_enable}: {state.connectionWifiEnabled ? yes : no}
             </Text>
-            <Text style={textStyle}>
-                {'\n'}{connectionDetail} : {'\n'}
+
+            <Text style={textStyleDetail}>{'\n'}{connectionDetail}</Text>
+            <View
+                style={borderLine}/>
+            <Text style={textStyleDetail}>
                 {state.connectionType == 'wifi'
                     ? (state.connectionDetails.isConnectionExpensive
                         ? connectionExpYes
@@ -133,6 +139,7 @@ const NetInfoDisplay = () => {
                         : checkYourConnection}
             </Text>
         </View>
+
     )
 }
 

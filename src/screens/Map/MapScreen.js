@@ -3,7 +3,6 @@ import {ActivityIndicator, Platform, ToastAndroid, View} from "react-native";
 import * as Location from "expo-location";
 import MapView, {Heatmap} from "react-native-maps";
 import SpeedOptions from "../../components/SpeedOptions/SpeedOptions";
-import CardInfo from "../../components/CardInfo/CardInfo";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import TextInputModal from "../../components/TextInputModal/TextInputModal";
 import RecordButton from "../../components/Buttons/RecordButton/RecordButton";
@@ -11,6 +10,7 @@ import StopButton from "../../components/Buttons/StopButton/StopButton";
 import LocationButton from "../../components/Buttons/Location/LocationButton";
 import {MapScreenStyles} from "./mapScreen.styles";
 import {t} from "../../language/language";
+import NetInfoDisplay from "../../components/NetInfoDisplay/NetInfoDisplay";
 
 const mapStyle = require("../../styles/MapStyle/MapStyle.json");
 
@@ -170,7 +170,7 @@ const MapScreen = ({navigation}) => {
                 )}
             </View>
 
-            {cardVisible ? <CardInfo/> : null}
+            {cardVisible ? <NetInfoDisplay/> : null}
             {textInputVisible ? (
                 <TextInputModal
                     visible={{textInputVisible, setTextInputVisible}}
