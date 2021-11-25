@@ -3,16 +3,18 @@ import {ActivityIndicator, Platform, ToastAndroid, View} from "react-native";
 import * as Location from "expo-location";
 import MapView, {Heatmap} from "react-native-maps";
 import SpeedOptions from "../../components/SpeedOptions/SpeedOptions";
-import CardInfo from "../../components/CardInfo/CardInfo";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import TextInputModal from "../../components/TextInputModal/TextInputModal";
 import RecordButton from "../../components/Buttons/RecordButton/RecordButton";
 import StopButton from "../../components/Buttons/StopButton/StopButton";
 import LocationButton from "../../components/Buttons/Location/LocationButton";
-import styles from "./MapScreen.styles";
+import {MapScreenStyles} from "./mapScreen.styles";
 import {t} from "../../language/language";
+import NetInfoDisplay from "../../components/NetInfoDisplay/NetInfoDisplay";
 
 const mapStyle = require("../../styles/MapStyle/MapStyle.json");
+
+const {buttonContainer, container, map} = MapScreenStyles
 
 const atHeatmapColor = "@heatmap_colors"
 const standard = "standard"
@@ -113,12 +115,12 @@ const MapScreen = ({navigation}) => {
     };
 
     return (
-        <View style={styles.container}>
+        <View style={container}>
             {isLoading ? (
-                <ActivityIndicator style={styles.map} size="large"/>
+                <ActivityIndicator style={map} size="large"/>
             ) : (
                 <MapView
-                    style={styles.map}
+                    style={map}
                     showsUserLocation={true}
                     showsMyLocationButton={false}
                     provider={googleProvider}
@@ -160,7 +162,7 @@ const MapScreen = ({navigation}) => {
                 deletePoints={{setPoints}}
             />
 
-            <View style={styles.buttonContainer}>
+            <View style={buttonContainer}>
                 {!rec ? (
                     <RecordButton onPress={() => recording()}/>
                 ) : (
@@ -168,13 +170,14 @@ const MapScreen = ({navigation}) => {
                 )}
             </View>
 
-            {cardVisible ? <CardInfo/> : null}
+            {cardVisible ? <NetInfoDisplay/> : null}
             {textInputVisible ? (
                 <TextInputModal
                     visible={{textInputVisible, setTextInputVisible}}
                     points={{points, setPoints}}
                 />
             ) : null}
+
             <LocationButton
                 onPress={() => {
                     this.mapView.animateCamera({

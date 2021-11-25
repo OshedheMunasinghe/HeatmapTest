@@ -3,16 +3,16 @@ import {Alert, View} from "react-native";
 
 import {SpeedDial} from "react-native-elements";
 import ColorPicker from "../ColorPicker/ColorPicker";
-import styles from "./SpeedOptions.styles";
+import {SpeedOptionsStyles} from "./speedOptions.styles";
 import {t} from "../../language/language";
 
 const iconColor = "white"
 const icons = {
     edit: {name: "add", color: iconColor},
-    map: {name: "map", color: iconColor},
-    dashboard: {name: "dashboard", color: iconColor},
-    settings: {name: "settings", color: iconColor},
-    send: {name: "send", color: iconColor},
+    map: {name: "dashboard", color: iconColor},
+    dashboard: {name: "public", color: iconColor},
+    settings: {name: "palette", color: iconColor},
+    send: {name: "cloud-upload", color: iconColor},
     delete: {name: "delete", color: iconColor},
     openDialIcon: {name: "close", color: iconColor}
 };
@@ -34,6 +34,8 @@ const deleteTitle = t('delete')
 const alertStyle = "cancel"
 const mapStandardStyle = "standard"
 const mapStatelliteStyle = "satellite"
+
+const {textContainer, smallIconButtonContainer, speedDialContainer} = SpeedOptionsStyles
 
 const SpeedOptions = (props) => {
     const [open, setOpen] = useState(false);
@@ -85,8 +87,8 @@ const SpeedOptions = (props) => {
             </View>
 
             <SpeedDial
+                containerStyle={speedDialContainer}
                 color={speedDialColor}
-                style={styles.speedContainer}
                 isOpen={open}
                 icon={icons.edit}
                 openIcon={icons.openDialIcon}
@@ -94,37 +96,46 @@ const SpeedOptions = (props) => {
                 onClose={() => setOpen(!open)}
             >
                 <SpeedDial.Action
-                    titleStyle={{fontFamily: "GenosR", backgroundColor: "#171C28", color: "white"}}
+                    style={smallIconButtonContainer}
+                    titleStyle={textContainer}
                     color={speedActionColor}
                     icon={icons.map}
                     title={dashboard}
                     onPress={() => showCard(props)}
                 />
                 <SpeedDial.Action
+                    style={smallIconButtonContainer}
                     color={speedActionColor}
                     icon={icons.dashboard}
                     title={
                         props.mapTypeProps.mapType === mapStandardStyle ? satelliteTitle : mapTitle
                     }
                     onPress={() => changeMapType(props)}
+                    titleStyle={textContainer}
                 />
                 <SpeedDial.Action
+                    style={smallIconButtonContainer}
                     color={speedActionColor}
                     icon={icons.settings}
                     title={heatmapColorsTitle}
                     onPress={() => setColorPickerVisible(true)}
+                    titleStyle={textContainer}
                 />
                 <SpeedDial.Action
+                    style={smallIconButtonContainer}
                     color={speedActionColor}
                     icon={icons.send}
                     title={sendToServerTitle}
                     onPress={showTextInput}
+                    titleStyle={textContainer}
                 />
                 <SpeedDial.Action
+                    style={smallIconButtonContainer}
                     color={speedActionColor}
                     icon={icons.delete}
                     title={deleteTitle}
                     onPress={deleteArray}
+                    titleStyle={textContainer}
                 />
             </SpeedDial>
         </>

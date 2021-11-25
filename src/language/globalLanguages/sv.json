@@ -41,5 +41,6 @@
   "toast_success": "Succé!",
   "toast_error": "Något gick fel!",
   "toast_stopped": "Inspelning har stoppat",
-  "toast_record": "Inspelning har startat"
+  "toast_record": "Inspelning har startat",
+  "choose_color_text": "VÄLJ FÄRG"
 }

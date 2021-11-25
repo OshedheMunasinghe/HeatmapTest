@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native'
 
-export default StyleSheet.create({
+export const StopButtonStyles = StyleSheet.create({
     button: {
         backgroundColor: '#D3D3D3',
         borderRadius: 16,
@@ -8,7 +8,7 @@ export default StyleSheet.create({
         height: 62,
     },
     title: {
-        color: 'red',
+        color: 'green',
         fontSize: 23
-    },
+    }
 })

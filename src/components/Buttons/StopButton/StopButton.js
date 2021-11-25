@@ -1,13 +1,18 @@
 import React from 'react'
 import {Button} from "react-native-elements";
-import styles from './StopButton.styles'
+import {StopButtonStyles} from './stopButton.styles'
+import {ButtonStyles} from "../button.styles";
+
+const {buttonShadow} = ButtonStyles
+const {button, title} = StopButtonStyles
 
 const StopButton = (props) => {
     return (
         <Button
             title={'■'}
-            buttonStyle={styles.button}
-            titleStyle={styles.title}
+            containerStyle={buttonShadow}
+            buttonStyle={button}
+            titleStyle={title}
             {...props}
         />
     )
