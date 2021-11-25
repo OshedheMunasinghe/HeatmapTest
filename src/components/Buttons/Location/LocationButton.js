@@ -5,7 +5,7 @@ import {LocationButtonStyles} from './locationButton.styles'
 import {ButtonStyles} from "../button.styles";
 
 const {buttonShadow} = ButtonStyles
-const {container, iOSContainer} = LocationButtonStyles
+const {container} = LocationButtonStyles
 
 const LocationButton = (props) => {
     return (

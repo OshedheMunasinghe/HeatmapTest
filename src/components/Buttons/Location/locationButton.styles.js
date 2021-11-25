@@ -4,8 +4,7 @@ export const LocationButtonStyles = StyleSheet.create({
     container: {
         flexDirection: 'row',
         position: 'absolute',
-        paddingHorizontal: 18,
-        bottom: 38,
-        left: 45
+        bottom: 36,
+        left: 43
     },
 })

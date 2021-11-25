@@ -35,7 +35,7 @@ const alertStyle = "cancel"
 const mapStandardStyle = "standard"
 const mapStatelliteStyle = "satellite"
 
-const {speedContainer, textContainer} = SpeedOptionsStyles
+const {textContainer, smallIconButtonContainer} = SpeedOptionsStyles
 
 const SpeedOptions = (props) => {
     const [open, setOpen] = useState(false);
@@ -87,8 +87,8 @@ const SpeedOptions = (props) => {
             </View>
 
             <SpeedDial
+                containerStyle={{marginBottom: 24, marginRight: 25}}
                 color={speedDialColor}
-                style={speedContainer}
                 isOpen={open}
                 icon={icons.edit}
                 openIcon={icons.openDialIcon}
@@ -96,6 +96,7 @@ const SpeedOptions = (props) => {
                 onClose={() => setOpen(!open)}
             >
                 <SpeedDial.Action
+                    style={smallIconButtonContainer}
                     titleStyle={textContainer}
                     color={speedActionColor}
                     icon={icons.map}
@@ -103,6 +104,7 @@ const SpeedOptions = (props) => {
                     onPress={() => showCard(props)}
                 />
                 <SpeedDial.Action
+                    style={smallIconButtonContainer}
                     color={speedActionColor}
                     icon={icons.dashboard}
                     title={
@@ -112,6 +114,7 @@ const SpeedOptions = (props) => {
                     titleStyle={textContainer}
                 />
                 <SpeedDial.Action
+                    style={smallIconButtonContainer}
                     color={speedActionColor}
                     icon={icons.settings}
                     title={heatmapColorsTitle}
@@ -119,6 +122,7 @@ const SpeedOptions = (props) => {
                     titleStyle={textContainer}
                 />
                 <SpeedDial.Action
+                    style={smallIconButtonContainer}
                     color={speedActionColor}
                     icon={icons.send}
                     title={sendToServerTitle}
@@ -126,6 +130,7 @@ const SpeedOptions = (props) => {
                     titleStyle={textContainer}
                 />
                 <SpeedDial.Action
+                    style={smallIconButtonContainer}
                     color={speedActionColor}
                     icon={icons.delete}
                     title={deleteTitle}
