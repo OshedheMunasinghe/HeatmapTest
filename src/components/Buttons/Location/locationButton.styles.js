@@ -1,6 +1,7 @@
 import {StyleSheet} from 'react-native'
 
-export default StyleSheet.create({
+//TODO: det behöver göras om Platform.OS kanske separera!
+export const LocationButtonStyles = StyleSheet.create({
     icon: {
         flexDirection: 'row',
         position: 'absolute',

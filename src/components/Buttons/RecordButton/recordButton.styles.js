@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native'
 
-export default StyleSheet.create({
+export const RecordButtonStyles = StyleSheet.create({
     button: {
         backgroundColor: '#D3D3D3',
         borderRadius: 16,
