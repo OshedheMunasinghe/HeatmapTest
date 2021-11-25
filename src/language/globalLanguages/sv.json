@@ -20,5 +20,14 @@
   "subnet": "Subnet: ",
   "save_button": "SPARA",
   "yes": "JA",
-  "no": "NEJ"
+  "no": "NEJ",
+  "are_you_sure_": "Ta bort Inspelning",
+  "alert_text": "Är du säkert att du vill ta bort din senaste inspelning?",
+  "cancel": "AVBRYT",
+  "title_dashboard": "ANSLAGSTAVLA",
+  "title_satellite": "SATELLIT",
+  "title_map": "KARTA",
+  "title_heatmapColors": "HEATMAP FÄRG",
+  "title_sendtoserver": "SKICKA TILL SERVER",
+  "delete": "TA BORT"
 }

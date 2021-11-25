@@ -5,11 +5,12 @@ import NetInfoDisplay from '../NetInfoDisplay/NetInfoDisplay'
 import styles from './CardInfo.styles'
 import {t} from '../../language/language'
 
+const connectionDetail = t('connection_detail')
 const CardInfo = () => {
     return (
         <View style={styles.cardView}>
             <Card containerStyle={styles.card}>
-                <Card.Title style={styles.textStyle}>{t('connection_detail')}</Card.Title>
+                <Card.Title style={styles.textStyle}>{connectionDetail}</Card.Title>
                 <Card.Divider/>
                 <NetInfoDisplay/>
             </Card>
