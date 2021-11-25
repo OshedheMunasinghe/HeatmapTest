@@ -10,9 +10,9 @@ export const ColorPickerStyles = StyleSheet.create({
     },
     hueButton: {
         padding: 0,
-        height: 32,
-        borderWidth: 0,
-        borderColor: "#000",
+        height: 80,
+        // borderWidth: 0,
+        // borderColor: "#000",
     },
     textStyle: {
         fontFamily: 'GenosR',
@@ -23,7 +23,7 @@ export const ColorPickerStyles = StyleSheet.create({
     overlayContainer: {
         width: "90%",
         backgroundColor: '#343C50',
-        minHeight: "40%",
+        minHeight: "28%",
     },
     boderLineStyle: {
         top: 8,
@@ -46,14 +46,20 @@ export const ColorPickerStyles = StyleSheet.create({
     buttonsContainer: {
         flexDirection: "row",
         justifyContent: "center",
-        top: 18
+        top: 14
     },
     buttonStyle: {
         margin: 8,
-        padding: 16
+        padding: 16,
+        width: 100
     },
-    buttonFlexContainer:{
+    buttonFlexContainer: {
         flexDirection: "row",
         justifyContent: "space-evenly"
-    }
+    },
+    buttonDefaultStyle: {
+        backgroundColor: "#545A69"
+    },
+
+    buttonDisableTarget: {}
 });

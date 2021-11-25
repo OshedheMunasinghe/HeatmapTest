@@ -23,8 +23,11 @@ const {
     hueButtonsContainer,
     buttonsContainer,
     buttonStyle,
-    buttonFlexContainer
+    buttonFlexContainer,
 } = ColorPickerStyles
+
+const buttonTargetHighLight = "#36E7FF"
+const buttonUnTarget = "#343C50"
 
 const ColorPicker = ({visible, setVisible, onSave}) => {
     const [saveButtonDisabled, setSaveButtonDisabled] = useState(true);
@@ -65,7 +68,7 @@ const ColorPicker = ({visible, setVisible, onSave}) => {
         for (let i = 0; i < buttons; i++) {
             const hsl = `hsl(${Math.round((i * 360.0) / buttons)},100%,50%)`;
             list.push(
-                <View key={i} style={{flex: 1, padding: 0, backgroundColor: hsl}}>
+                <View key={i} style={{flex: 1, backgroundColor: hsl}}>
                     <Button
                         onPress={() => {
                             if (pickedButton !== -1) {
@@ -79,9 +82,9 @@ const ColorPicker = ({visible, setVisible, onSave}) => {
                         buttonStyle={[
                             hueButton,
                             {
-                                padding: 0,
-                                height: 32,
-                                borderColor: "#000",
+                                // padding: 0,
+                                // height: 32,
+                                // borderColor: "#000",
                                 backgroundColor: hsl,
                             },
                         ]}
@@ -103,7 +106,7 @@ const ColorPicker = ({visible, setVisible, onSave}) => {
                             paletteButton,
                             {
                                 backgroundColor: buttonColors[i],
-                                borderColor: i === pickedButton ? "cyan" : "#FFF",
+                                borderColor: i === pickedButton ? buttonTargetHighLight : buttonUnTarget,
                             },
                         ]}
                         onPress={() => {
