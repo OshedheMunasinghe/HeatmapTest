@@ -9,10 +9,10 @@ import {t} from "../../language/language";
 const iconColor = "white"
 const icons = {
     edit: {name: "add", color: iconColor},
-    map: {name: "map", color: iconColor},
-    dashboard: {name: "dashboard", color: iconColor},
-    settings: {name: "settings", color: iconColor},
-    send: {name: "send", color: iconColor},
+    map: {name: "dashboard", color: iconColor},
+    dashboard: {name: "public", color: iconColor},
+    settings: {name: "palette", color: iconColor},
+    send: {name: "cloud-upload", color: iconColor},
     delete: {name: "delete", color: iconColor},
     openDialIcon: {name: "close", color: iconColor}
 };
@@ -35,7 +35,7 @@ const alertStyle = "cancel"
 const mapStandardStyle = "standard"
 const mapStatelliteStyle = "satellite"
 
-const {speedContainer} = SpeedOptionsStyles
+const {speedContainer, textContainer} = SpeedOptionsStyles
 
 const SpeedOptions = (props) => {
     const [open, setOpen] = useState(false);
@@ -96,7 +96,7 @@ const SpeedOptions = (props) => {
                 onClose={() => setOpen(!open)}
             >
                 <SpeedDial.Action
-                    titleStyle={{fontFamily: "GenosR", backgroundColor: "#171C28", color: "white"}}
+                    titleStyle={textContainer}
                     color={speedActionColor}
                     icon={icons.map}
                     title={dashboard}
@@ -109,24 +109,28 @@ const SpeedOptions = (props) => {
                         props.mapTypeProps.mapType === mapStandardStyle ? satelliteTitle : mapTitle
                     }
                     onPress={() => changeMapType(props)}
+                    titleStyle={textContainer}
                 />
                 <SpeedDial.Action
                     color={speedActionColor}
                     icon={icons.settings}
                     title={heatmapColorsTitle}
                     onPress={() => setColorPickerVisible(true)}
+                    titleStyle={textContainer}
                 />
                 <SpeedDial.Action
                     color={speedActionColor}
                     icon={icons.send}
                     title={sendToServerTitle}
                     onPress={showTextInput}
+                    titleStyle={textContainer}
                 />
                 <SpeedDial.Action
                     color={speedActionColor}
                     icon={icons.delete}
                     title={deleteTitle}
                     onPress={deleteArray}
+                    titleStyle={textContainer}
                 />
             </SpeedDial>
         </>

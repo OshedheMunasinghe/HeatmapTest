@@ -7,4 +7,10 @@ export const SpeedOptionsStyles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
     },
+    textContainer: {
+        fontFamily: "GenosR",
+        backgroundColor: "#171C28",
+        color: "white",
+        fontSize: 18
+    }
 });
